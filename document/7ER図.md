@@ -34,6 +34,7 @@ erDiagram
     HISTORIES {
         BIGINT id PK
         BIGINT shift_id FK
+        BIGINT staff_id FK
         TIMESTAMP modified_at
         DATE shift_date
         TIME start_time
@@ -63,5 +64,8 @@ erDiagram
     STORES ||--o{ STAFF_STORES : ""
     STAFFS ||--o{ SHIFTS : ""
     STORES ||--o{ SHIFTS : ""
-    SHIFTS ||--o{ HISTORIES : ""
+    SHIFTS ||--o| HISTORIES : ""
+    STAFFS ||--o| HISTORIES : ""
+
+
 ```
