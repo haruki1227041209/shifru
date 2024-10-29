@@ -1,2 +1,3 @@
 .env
 backend/.DS_Store
+backend/erd.pdf
