@@ -3,7 +3,7 @@ erDiagram
     STAFFS {
         BIGINT id PK
         VARCHAR name
-        VARCHAR employee_number
+        BIGINT employee_number
         VARCHAR password_digest
         BOOLEAN is_manager
         TIMESTAMP created_at
@@ -13,7 +13,7 @@ erDiagram
     STORES {
         BIGINT id PK
         VARCHAR name
-        VARCHAR location
+        BIGINT store_number
         TIMESTAMP created_at
         TIMESTAMP updated_at
     }
