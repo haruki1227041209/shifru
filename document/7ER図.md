@@ -3,7 +3,7 @@ erDiagram
     STAFFS {
         BIGINT id PK
         VARCHAR name
-        VARCHAR employee_number
+        BIGINT employee_number
         VARCHAR password_digest
         BOOLEAN is_manager
         TIMESTAMP created_at
@@ -13,7 +13,7 @@ erDiagram
     STORES {
         BIGINT id PK
         VARCHAR name
-        VARCHAR location
+        BIGINT store_number
         TIMESTAMP created_at
         TIMESTAMP updated_at
     }
@@ -34,6 +34,7 @@ erDiagram
     HISTORIES {
         BIGINT id PK
         BIGINT shift_id FK
+        BIGINT staff_id FK
         TIMESTAMP modified_at
         DATE shift_date
         TIME start_time
@@ -63,5 +64,8 @@ erDiagram
     STORES ||--o{ STAFF_STORES : ""
     STAFFS ||--o{ SHIFTS : ""
     STORES ||--o{ SHIFTS : ""
-    SHIFTS ||--o{ HISTORIES : ""
+    SHIFTS ||--o| HISTORIES : ""
+    STAFFS ||--o| HISTORIES : ""
+
+
 ```
