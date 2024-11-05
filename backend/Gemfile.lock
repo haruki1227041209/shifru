@@ -90,6 +90,8 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.7.4)
+    jwt (2.9.3)
+      base64
     language_server-protocol (3.17.0.3)
     logger (1.6.1)
     loofah (2.23.1)
@@ -231,6 +233,7 @@ DEPENDENCIES
   bigdecimal
   bootsnap
   debug
+  jwt
   logger
   mutex_m
   mysql2 (>= 0.5.3)
