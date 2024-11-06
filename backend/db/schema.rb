@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_10_29_042226) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_06_144207) do
+  create_table "areas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "histories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "staff_id", null: false
     t.bigint "shift_id", null: false
@@ -52,15 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_29_042226) do
     t.index ["staff_id"], name: "index_staff_roles_on_staff_id"
   end
 
-  create_table "staff_stores", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "staff_id", null: false
-    t.bigint "store_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["staff_id"], name: "index_staff_stores_on_staff_id"
-    t.index ["store_id"], name: "index_staff_stores_on_store_id"
-  end
-
   create_table "staffs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "employee_number", null: false
@@ -68,7 +65,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_29_042226) do
     t.boolean "is_manager", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "store_id", null: false
     t.index ["employee_number"], name: "index_staffs_on_employee_number", unique: true
+    t.index ["store_id"], name: "index_staffs_on_store_id"
   end
 
   create_table "stores", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -76,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_29_042226) do
     t.bigint "store_number", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "area_id"
     t.index ["store_number"], name: "index_stores_on_store_number", unique: true
   end
 
@@ -85,6 +85,4 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_29_042226) do
   add_foreign_key "shifts", "stores"
   add_foreign_key "staff_roles", "roles"
   add_foreign_key "staff_roles", "staffs"
-  add_foreign_key "staff_stores", "staffs"
-  add_foreign_key "staff_stores", "stores"
 end
