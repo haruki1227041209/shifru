@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_06_144207) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_10_051746) do
   create_table "areas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -65,7 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_06_144207) do
     t.boolean "is_manager", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "store_id", null: false
+    t.bigint "store_id"
+    t.boolean "is_admin", default: false
     t.index ["employee_number"], name: "index_staffs_on_employee_number", unique: true
     t.index ["store_id"], name: "index_staffs_on_store_id"
   end

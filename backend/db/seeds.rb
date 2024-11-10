@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Staff.create!(
+  name: "管理者ユーザー",
+  employee_number: ENV['ADMIN_EMPLOYEE_NUMBER'],
+  password: ENV['ADMIN_PASSWORD'],
+  is_admin: true
+)
