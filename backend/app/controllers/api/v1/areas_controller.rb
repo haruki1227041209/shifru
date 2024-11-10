@@ -1,4 +1,6 @@
 class Api::V1::AreasController < ApplicationController
+  before_action :authenticate_staff
+  before_action :authorize_admin
   before_action :set_area, only: [:show, :update, :destroy]
 
   def index

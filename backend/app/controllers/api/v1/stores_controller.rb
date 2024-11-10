@@ -1,4 +1,6 @@
 class Api::V1::StoresController < ApplicationController
+  before_action :authenticate_staff
+  before_action :authorize_admin
   before_action :set_store, only: [:show, :update, :destroy]
 
   def index
