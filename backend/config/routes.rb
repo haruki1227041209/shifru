@@ -6,8 +6,8 @@ Rails.application.routes.draw do
       get 'validate_token', to: 'auth#validate_token'
       resources :areas
       resources :stores
-      resources :staffs, only: [:create, :show, :update]
-      resources :shifts, only: [:index, :create, :update, :destroy]
+      resources :staffs
+      resources :shifts
     end
   end
 end
