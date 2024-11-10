@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_11_10_051746) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_10_165825) do
   create_table "areas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_11_10_051746) do
     t.boolean "is_confirm", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["staff_id", "day"], name: "index_shifts_on_staff_id_and_day", unique: true
     t.index ["staff_id"], name: "index_shifts_on_staff_id"
     t.index ["store_id"], name: "index_shifts_on_store_id"
   end
