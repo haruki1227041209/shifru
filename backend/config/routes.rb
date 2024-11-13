@@ -7,9 +7,19 @@ Rails.application.routes.draw do
       resources :areas
       resources :stores
       resources :staffs
+
       resources :staff_shifts, only: [:index, :destroy] do
         collection do
           post :bulk_upsert
+        end
+      end
+
+      resources :manager_shifts, only: [:index] do
+        collection do
+          patch :bulk_unregister
+        end
+        member do
+          patch :update_time
         end
       end
     end
