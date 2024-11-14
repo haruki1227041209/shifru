@@ -4,8 +4,25 @@ class Api::V1::ManagerShiftsController < ApplicationController
   before_action :set_shift, only: [:update_time]
 
   def index
-    shifts = Shift.where(is_confirm: true)
-    render json: shifts, status: :ok
+    shifts = Shift.where(is_confirm: true, is_edit: false)
+
+    edited_shifts = Shift.where(is_confirm: true, is_edit: true).map do |shift|
+      history = History.find_by(shift_id: shift.id)
+      if history
+        shift.attributes.merge(
+          {
+            start_time: history.start_time,
+            end_time: history.end_time
+          }
+        )
+      else
+        shift
+      end
+    end
+
+    all_shifts = shifts + edited_shifts
+
+    render json: all_shifts, status: :ok
   end
 
   def bulk_unregister
