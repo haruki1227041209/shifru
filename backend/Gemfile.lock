@@ -80,6 +80,10 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    dotenv (3.1.4)
+    dotenv-rails (3.1.4)
+      dotenv (= 3.1.4)
+      railties (>= 6.1)
     erubi (1.13.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -233,6 +237,7 @@ DEPENDENCIES
   bigdecimal
   bootsnap
   debug
+  dotenv-rails
   jwt
   logger
   mutex_m

@@ -3,6 +3,8 @@ class ApplicationController < ActionController::API
 
   attr_reader :current_staff
 
+  private
+
   def logged_in?
     !!current_staff
   end
@@ -21,5 +23,13 @@ class ApplicationController < ActionController::API
     rescue JWT::ExpiredSignature
       render json: { errors: { message: 'トークンの有効期限が切れています' } }, status: :unauthorized
     end
+  end
+
+  def authorize_admin
+    render json: { error: 'Access denied' }, status: :forbidden unless current_staff&.is_admin
+  end
+
+  def authorize_admin_or_manager
+    render json: { error: 'Access denied' }, status: :forbidden unless current_staff&.is_admin || current_staff&.is_manager
   end
 end

@@ -4,8 +4,11 @@ services:
   db:
     image: mysql:8.4
     env_file: .env
+    environment:
+      - TZ=Asia/Tokyo # データベースのタイムゾーンを日本時間に設定
     volumes:
       - db_data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf # MySQLの設定ファイルをマウント
     ports:
       - "3306:3306"
 
@@ -17,6 +20,8 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - TZ=Asia/Tokyo # Railsのタイムゾーンを日本時間に設定
     env_file: .env
 
   frontend:
@@ -25,6 +30,8 @@ services:
       - ./frontend:/app
     ports:
       - "4000:3000"
+    environment:
+      - TZ=Asia/Tokyo # Next.jsのタイムゾーンを日本時間に設定
 
 volumes:
   db_data:
