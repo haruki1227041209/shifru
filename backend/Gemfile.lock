@@ -234,6 +234,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  actionpack
   base64
   bcrypt (~> 3.1.7)
   bigdecimal

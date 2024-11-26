@@ -8,10 +8,24 @@ class Api::V1::AuthController < ApplicationController
 
     if staff&.authenticate(params[:staff][:password])
       token = generate_token(staff.id)
-      render json: { staff: { employee_number: staff.employee_number, token: token } }, status: :ok
+
+      cookies[:jwt] = {
+        value: token,
+        httponly: true,
+        secure: Rails.env.production?,
+        same_site: :strict,
+        expires: 1.hour.from_now
+      }
+
+      render json: { employee_number: staff.employee_number, is_admin: staff.is_admin, is_manager: staff.is_manager }
     else
       render json: { errors: { message: '認証に失敗しました' } }, status: :unauthorized
     end
+  end
+
+  def logout
+    cookies.delete(:jwt, httponly: true, secure: Rails.env.production?)
+    render json: { message: "Logged out successfully" }
   end
 
   def validate_token
