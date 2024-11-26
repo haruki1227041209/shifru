@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post 'login', to: 'auth#login'
+      delete 'logout', to: 'auth#logout'
       get 'validate_token', to: 'auth#validate_token'
       resources :areas
       resources :stores
