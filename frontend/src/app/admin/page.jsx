@@ -3,16 +3,16 @@
 import useAuthorization from "@/hooks/useAuthorization";
 import LogoutButton from "@/components/LogoutButton";
 
-const ManagerPage = () => {
-  useAuthorization("manager");
+const AdminPage = () => {
+  useAuthorization("admin");
 
   return (
     <div>
-      <h1>店長専用ページ</h1>
-      <p>ここは店長のみがアクセスできます。</p>
+      <h1>管理者専用ページ</h1>
+      <p>ここは管理者のみがアクセスできます。</p>
       <LogoutButton />
     </div>
   );
 };
 
-export default ManagerPage;
+export default AdminPage;
