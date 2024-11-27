@@ -2,8 +2,19 @@ class Api::V1::StaffShiftsController < ApplicationController
   before_action :authenticate_staff
 
   def index
-    shifts = Shift.where(staff_id: current_staff.id)
-    render json: shifts, status: :ok
+    shifts = current_staff.shifts.includes(:store).order(day: :asc)
+
+    render json: shifts.map { |shift|
+      {
+        id: shift.id,
+        day: shift.day,
+        start_time: shift.start_time.strftime("%H:%M"),
+        end_time: shift.end_time.strftime("%H:%M"),
+        store_name: shift.store.name,
+        is_confirm: shift.is_confirm,
+        is_edit: shift.is_edit
+      }
+    }, status: :ok
   end
 
   def bulk_upsert
