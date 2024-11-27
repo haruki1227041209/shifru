@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include ActionController::Cookies
+
   SECRET_KEY = Rails.application.secrets.secret_key_base.to_s
 
   attr_reader :current_staff
@@ -10,8 +12,8 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_staff
-    header = request.headers['Authorization']
-    token = header.split.last if header
+    token = cookies[:jwt]
+    return render json: { error: "Not Authorized" }, status: :unauthorized unless token
 
     begin
       decoded = JWT.decode(token, SECRET_KEY)[0]
