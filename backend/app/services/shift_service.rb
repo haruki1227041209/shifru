@@ -5,8 +5,8 @@ class ShiftService
         shift_id: shift.id,
         store_id: shift.store_id,
         day: shift.day,
-        start_time: shift.start_time,
-        end_time: shift.end_time,
+        start_time: shift.start_time.strftime("%H:%M"),
+        end_time: shift.end_time.strftime("%H:%M"),
         is_confirm: shift.is_confirm,
         is_edit: shift.is_edit,
         staff_name: shift.staff.name
@@ -20,8 +20,8 @@ class ShiftService
           shift_id: shift.id,
           store_id: shift.store_id,
           day: shift.day,
-          start_time: history.start_time,
-          end_time: history.end_time,
+          start_time: history.start_time.strftime("%H:%M"),
+          end_time: history.end_time.strftime("%H:%M"),
           is_confirm: shift.is_confirm,
           is_edit: shift.is_edit,
           staff_name: shift.staff.name
@@ -31,8 +31,8 @@ class ShiftService
           shift_id: shift.id,
           store_id: shift.store_id,
           day: shift.day,
-          start_time: shift.start_time,
-          end_time: shift.end_time,
+          start_time: shift.start_time.strftime("%H:%M"),
+          end_time: shift.end_time.strftime("%H:%M"),
           is_confirm: shift.is_confirm,
           is_edit: shift.is_edit,
           staff_name: shift.staff.name
