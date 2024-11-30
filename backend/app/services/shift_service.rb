@@ -9,6 +9,7 @@ class ShiftService
         end_time: shift.end_time.strftime("%H:%M"),
         is_confirm: shift.is_confirm,
         is_edit: shift.is_edit,
+        staff_id: shift.staff.id,
         staff_name: shift.staff.name
       }
     end
@@ -24,6 +25,7 @@ class ShiftService
           end_time: history.end_time.strftime("%H:%M"),
           is_confirm: shift.is_confirm,
           is_edit: shift.is_edit,
+          staff_id: shift.staff.id,
           staff_name: shift.staff.name
         }
       else
@@ -35,6 +37,7 @@ class ShiftService
           end_time: shift.end_time.strftime("%H:%M"),
           is_confirm: shift.is_confirm,
           is_edit: shift.is_edit,
+          staff_id: shift.staff.id,
           staff_name: shift.staff.name
         }
       end

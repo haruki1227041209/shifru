@@ -6,6 +6,7 @@ class ShiftSerializer
       shifts.map do |shift|
         {
           shift_id: shift[:shift_id],
+          staff_id: shift[:staff_id],
           store_id: shift[:store_id],
           day: shift[:day],
           start_time: shift[:start_time],
