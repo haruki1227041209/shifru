@@ -5,9 +5,7 @@ class Api::V1::ManagerShiftsController < ApplicationController
 
   def index
     all_shifts = ShiftService.fetch_all_shifts
-
     formatted_shifts = ShiftSerializer.serialize(all_shifts)
-
     render json: formatted_shifts, status: :ok
   end
 
