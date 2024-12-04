@@ -1,0 +1,86 @@
+.shift-schedule {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 100%;
+  margin: auto;
+}
+
+.shift-schedule h1,
+.shift-schedule h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.view-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.view-selector button {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.view-selector button.active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.shift-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  table-layout: fixed;
+}
+
+.shift-table th,
+.shift-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  vertical-align: middle;
+  word-wrap: break-word;
+  overflow: hidden;
+  white-space: normal;
+  font-size: 14px;
+}
+
+.shift-table th {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+.shift-table td {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.shift-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.shift-table td.shift-cell {
+  min-width: 50px;
+  height: 40px;
+}
+
+.shift-table .weekday {
+  font-size: 12px; /* 曜日は小さめに表示 */
+  color: #555;
+}
+
+@media screen and (max-width: 768px) {
+  .shift-table th,
+  .shift-table td {
+    font-size: 12px;
+    padding: 5px;
+  }
+}
