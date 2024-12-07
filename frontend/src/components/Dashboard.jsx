@@ -19,7 +19,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
-export default function ManagerDashboard({ children, navItems }) {
+export default function Dashboard({ children, navItems }) {
   return (
     <SidebarProvider>
       <div className="flex h-screen">
