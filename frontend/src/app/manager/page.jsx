@@ -2,14 +2,14 @@
 
 import useAuthorization from "@/hooks/useAuthorization";
 import LogoutButton from "@/components/LogoutButton";
+import ShiftSchedule from "@/components/ShiftSchedule/ShiftSchedule";
 
 const ManagerPage = () => {
   useAuthorization("manager");
 
   return (
     <div>
-      <h1>店長専用ページ</h1>
-      <p>ここは店長のみがアクセスできます。</p>
+      <ShiftSchedule />
       <LogoutButton />
     </div>
   );
