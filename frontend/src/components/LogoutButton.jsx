@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { logout } from "@/api/authService";
 import { useSetAtom } from "jotai";
-import { roleAtom } from "@/state/authAtom";
+import { roleAtom } from "@/atoms/authAtom";
 
 const LogoutButton = () => {
   const router = useRouter();
