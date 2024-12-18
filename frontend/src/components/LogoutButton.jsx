@@ -1,11 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { logout } from "@/api/authService";
 import { useSetAtom } from "jotai";
 import { roleAtom } from "@/atoms/authAtom";
+import { useLogin } from "@/hooks/useLogin";
 
 const LogoutButton = () => {
+  const { logout } = useLogin();
   const router = useRouter();
   const setRole = useSetAtom(roleAtom);
 
