@@ -1,6 +1,6 @@
 import axiosClient from "./axiosClient";
 
-export const login = async (employeeNumber, password) => {
+export const loginRequest = async (employeeNumber, password) => {
   const response = await axiosClient.post("/login", {
     staff: {
       employee_number: employeeNumber,
@@ -10,7 +10,7 @@ export const login = async (employeeNumber, password) => {
   return response.data;
 };
 
-export const logout = async () => {
+export const logoutRequest = async () => {
   const response = await axiosClient.delete("/logout");
   return response.data;
 };
