@@ -19,7 +19,12 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 
-export default function Dashboard({ children, navItems }) {
+export default function Dashboard({
+  navItems,
+  staffName,
+  storeName,
+  children,
+}) {
   return (
     <SidebarProvider>
       <div className="flex h-screen">
@@ -30,7 +35,7 @@ export default function Dashboard({ children, navItems }) {
                 <AvatarFallback>店長</AvatarFallback>
               </Avatar>
               <div>
-                <p className="text-sm font-medium">山田 太郎</p>
+                <p className="text-sm font-medium">{staffName}</p>
               </div>
             </div>
           </SidebarHeader>
