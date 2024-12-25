@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { getStaffShifts } from "@/api/staffShiftService";
-import LogoutButton from "@/components/LogoutButton";
 import useAuthorization from "@/hooks/useAuthorization";
 
 const StaffShiftsPage = () => {
@@ -55,7 +54,6 @@ const StaffShiftsPage = () => {
           ))}
         </tbody>
       </table>
-      <LogoutButton />
     </div>
   );
 };

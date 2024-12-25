@@ -1,7 +1,6 @@
 "use client";
 
 import useAuthorization from "@/hooks/useAuthorization";
-import LogoutButton from "@/components/LogoutButton";
 import ShiftSchedule from "@/components/ShiftSchedule/ShiftSchedule";
 
 const ManagerPage = () => {
@@ -10,7 +9,6 @@ const ManagerPage = () => {
   return (
     <div>
       <ShiftSchedule />
-      <LogoutButton />
     </div>
   );
 };
