@@ -2,7 +2,7 @@
 
 import React from "react";
 import Dashboard from "@/components/Dashboard";
-import { Calendar, Users, Settings } from "lucide-react";
+import { Calendar, Users } from "lucide-react";
 import { useAtom } from "jotai";
 import { staffNameAtom } from "@/atoms/staffAtom";
 
@@ -11,9 +11,8 @@ export default function ManagerLayout({ children }) {
 
   const dashboardProps = {
     navItems: [
-      { title: "シフト管理", icon: Calendar, url: "/manager" },
-      { title: "スタッフ管理", icon: Users, url: "/manager/staff-management" },
-      { title: "設定", icon: Settings, url: "/manager/settings" },
+      { title: "個人シフト", icon: Users, url: "/staff" },
+      { title: "確定シフト", icon: Calendar, url: "/staff/all-shifts" },
     ],
     staffName: staffName,
     storeName: "八丁堀店",
