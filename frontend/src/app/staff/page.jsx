@@ -1,26 +1,63 @@
 "use client";
 
-import useAuthorization from "@/hooks/useAuthorization";
+import { useEffect, useState } from "react";
+import { getStaffShifts } from "@/api/staffShiftService";
 import LogoutButton from "@/components/LogoutButton";
-import { useRouter } from "next/navigation";
+import useAuthorization from "@/hooks/useAuthorization";
 
-const StaffPage = () => {
+const StaffShiftsPage = () => {
   useAuthorization("staff");
 
-  const router = useRouter();
+  const [shifts, setShifts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const navigateToShifts = () => {
-    router.push("/staff-shifts");
-  };
+  useEffect(() => {
+    const fetchShifts = async () => {
+      try {
+        const data = await getStaffShifts();
+        setShifts(data);
+      } catch (error) {
+        console.error("シフト一覧の取得に失敗しました:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchShifts();
+  }, []);
+
+  if (loading) return <p>読み込み中...</p>;
 
   return (
     <div>
-      <h1>スタッフ専用ページ</h1>
-      <p>ここはスタッフのみがアクセスできます。</p>
+      <h1>シフト一覧</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>日付</th>
+            <th>開始時間</th>
+            <th>終了時間</th>
+            <th>店舗名</th>
+            <th>確定済み</th>
+            <th>編集済み</th>
+          </tr>
+        </thead>
+        <tbody>
+          {shifts.map((shift) => (
+            <tr key={shift.id}>
+              <td>{shift.day}</td>
+              <td>{shift.start_time}</td>
+              <td>{shift.end_time}</td>
+              <td>{shift.store_name}</td>
+              <td>{shift.is_confirm ? "✔️" : "✖️"}</td>
+              <td>{shift.is_edit ? "✔️" : "✖️"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <LogoutButton />
-      <button onClick={navigateToShifts}>シフト一覧を見る</button>
     </div>
   );
 };
 
-export default StaffPage;
+export default StaffShiftsPage;
