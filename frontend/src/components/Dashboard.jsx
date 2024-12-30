@@ -16,7 +16,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./elements/LogoutButton";
 
 export default function Dashboard({
   navItems,
