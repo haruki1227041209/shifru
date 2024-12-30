@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { getStaffShifts } from "@/api/staffShiftService";
 import useAuthorization from "@/hooks/useAuthorization";
-import StaffShiftCalender from "@/features/personalShifts/components/StaffShiftCalendar";
+import StaffShiftCalendar from "@/features/personalShifts/components/StaffShiftCalendar";
 
 const ShiftsPage = () => {
   useAuthorization("staff");
