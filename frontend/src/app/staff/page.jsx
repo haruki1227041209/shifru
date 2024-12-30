@@ -1,7 +1,7 @@
 "use client";
 
 import useAuthorization from "@/hooks/useAuthorization";
-import StaffShiftCalender from "@/features/personalShifts/components/StaffShiftCalender";
+import StaffShiftCalender from "@/features/personalShifts/components/StaffShiftCalendar";
 
 const StaffShiftsPage = () => {
   useAuthorization("staff");
