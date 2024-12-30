@@ -3,9 +3,9 @@ import CalendarNavigation from "@/components/calendar/CalendarNavigation";
 
 const StaffShiftCalendar = () => {
   const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
-  const [isFirstHalf, setIsFirstHalf] = useState(true);
+  const [year, setYear] = useState(today.getFullYear());
+  const [month, setMonth] = useState(today.getMonth());
+  const [isFirstHalf, setIsFirstHalf] = useState(today.getDate() <= 15);
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -22,7 +22,11 @@ const StaffShiftCalendar = () => {
   const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
 
   const goToPrevious = () => {
-    if (!isFirstHalf) {
+    if (isFirstHalf) {
+      setIsFirstHalf(false);
+      setMonth((prev) => (prev === 0 ? 11 : prev - 1));
+      if (month === 0) setYear((prev) => prev - 1);
+    } else {
       setIsFirstHalf(true);
     }
   };
@@ -30,8 +34,17 @@ const StaffShiftCalendar = () => {
   const goToNext = () => {
     if (isFirstHalf) {
       setIsFirstHalf(false);
+    } else {
+      setIsFirstHalf(true);
+      setMonth((prev) => (prev === 11 ? 0 : prev + 1));
+      if (month === 11) setYear((prev) => prev + 1);
     }
   };
+
+  const isToday = (date) =>
+    date === today.getDate() &&
+    month === today.getMonth() &&
+    year === today.getFullYear();
 
   return (
     <div>
@@ -59,9 +72,24 @@ const StaffShiftCalendar = () => {
         {dates.map((date) => (
           <div
             key={date}
-            className="border p-1 h-24 text-xs overflow-y-auto cursor-pointer"
+            className="border p-1 h-24 text-xs cursor-pointer flex flex-col justify-between"
           >
-            {date}
+            {/* 日付 */}
+            <div
+              className={`${isToday(date) ? "text-blue-600 semi-bold" : ""}`}
+            >
+              {date}
+            </div>
+
+            <div className="text-[9px]">
+              <div>ランチ</div>茅場町
+            </div>
+
+            {/* 時間表示 */}
+            <div className="text-gray-600">10:00</div>
+
+            {/* ラベル表示 */}
+            <div className="font-medium">23:00</div>
           </div>
         ))}
       </div>
