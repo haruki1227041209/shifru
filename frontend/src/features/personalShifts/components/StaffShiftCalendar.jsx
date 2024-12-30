@@ -74,7 +74,6 @@ const StaffShiftCalendar = () => {
             key={date}
             className="border p-1 h-24 text-xs cursor-pointer flex flex-col justify-between"
           >
-            {/* 日付 */}
             <div
               className={`${isToday(date) ? "text-blue-600 semi-bold" : ""}`}
             >
@@ -85,10 +84,8 @@ const StaffShiftCalendar = () => {
               <div>ランチ</div>茅場町
             </div>
 
-            {/* 時間表示 */}
             <div className="text-gray-600">10:00</div>
 
-            {/* ラベル表示 */}
             <div className="font-medium">23:00</div>
           </div>
         ))}
