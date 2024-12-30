@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "../../../components/ui/button";
+import CalendarNavigation from "@/components/calendar/CalendarNavigation";
 
 const StaffShiftCalendar = () => {
   const today = new Date();
@@ -35,24 +35,21 @@ const StaffShiftCalendar = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
-        <Button onClick={goToPrevious}>前の期間</Button>
-        <h2 className="text-m font-semibold">
-          {`${year}年${month + 1}月 ${isFirstHalf ? "前半" : "後半"}`}
-        </h2>
-        <Button onClick={goToNext}>次の期間</Button>
-      </div>
-      <h1>{`${year}年${month + 1}月`}</h1>
+      <CalendarNavigation
+        onPrevious={goToPrevious}
+        onNext={goToNext}
+        title={`${year}年${month + 1}月 ${isFirstHalf ? "前半" : "後半"}`}
+      />
 
-      <div className="grid grid-cols-7 gap-1 text-center">
+      <div className="grid grid-cols-7 gap-0.5 text-center">
         {weekdays.map((weekday) => (
-          <div key={weekday} className="font-bold p-2">
+          <div key={weekday} className="text-xs font-bold p-2">
             {weekday}
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-7 gap-1 text-left">
+      <div className="grid grid-cols-7 gap-0.5 text-left">
         {/* 空白セルを追加 */}
         {Array.from({ length: firstDayOfWeek }).map((_, index) => (
           <div key={`empty-${index}`} className="p-1 h-24" />
@@ -62,7 +59,7 @@ const StaffShiftCalendar = () => {
         {dates.map((date) => (
           <div
             key={date}
-            className="border p-1 h-24 overflow-y-auto cursor-pointer"
+            className="border p-1 h-24 text-xs overflow-y-auto cursor-pointer"
           >
             {date}
           </div>

@@ -1,11 +1,10 @@
 import React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // 矢印アイコン
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const CalendarNavigation = ({ onPrevious, onNext }) => {
+const CalendarNavigation = ({ onPrevious, onNext, title }) => {
   return (
     <div className="flex items-center justify-between mb-4">
-      {/* 前へボタン */}
       <Button
         variant="outline"
         size="icon"
@@ -15,10 +14,8 @@ const CalendarNavigation = ({ onPrevious, onNext }) => {
         <ChevronLeft className="h-5 w-5" />
       </Button>
 
-      {/* 月表示 */}
-      <h1 className="text-lg font-bold">{/* 年月を表示 */}</h1>
+      <h1 className="text-sm font-bold">{title}</h1>
 
-      {/* 次へボタン */}
       <Button
         variant="outline"
         size="icon"
