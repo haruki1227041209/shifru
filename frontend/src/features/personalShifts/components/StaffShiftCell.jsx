@@ -1,4 +1,4 @@
-const StaffShiftCell = ({ date, isToday }) => {
+const StaffShiftCell = ({ date, isToday, shift }) => {
   return (
     <div
       key={`${date.year}-${date.month}-${date.day}`}
@@ -12,11 +12,17 @@ const StaffShiftCell = ({ date, isToday }) => {
         {date.day}
       </div>
 
-      <div className="text-[9px] text-center">
-        <div>ランチ</div>
-        <div>茅場町</div>
-        <div>10:00</div>
-        <div>23:00</div>
+      <div className="flex-1 flex flex-col items-center justify-center text-center">
+        {shift ? (
+          <div className="text-[9px]">
+            {/* <div>ランチ</div>
+            <div>茅場町</div> */}
+            <div>{shift.start_time}</div>
+            <div>{shift.end_time === "23:30" ? "last" : shift.end_time}</div>
+          </div>
+        ) : (
+          <div className="text-xl"> - </div>
+        )}
       </div>
     </div>
   );
