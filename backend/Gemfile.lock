@@ -80,6 +80,8 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    dockerfile-rails (1.6.25)
+      rails (>= 3.0.0)
     dotenv (3.1.4)
     dotenv-rails (3.1.4)
       dotenv (= 3.1.4)
@@ -240,6 +242,7 @@ DEPENDENCIES
   bigdecimal
   bootsnap
   debug
+  dockerfile-rails (~> 1.6.25)
   dotenv-rails
   jwt
   logger

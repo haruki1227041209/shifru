@@ -59,3 +59,4 @@ group :development do
   gem 'rails-erd'
 end
 
+gem 'dockerfile-rails', '~> 1.6.25'
