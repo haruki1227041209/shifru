@@ -13,7 +13,7 @@ export default function ManagerLayout({ children }) {
     navItems: [
       { title: "シフト管理", icon: Calendar, url: "/manager" },
       { title: "スタッフ管理", icon: Users, url: "/manager/staff-management" },
-      { title: "設定", icon: Settings, url: "/manager/settings" },
+      { title: "設定", icon: Settings, url: "/manager/manager-settings" },
     ],
     staffName: staffName,
     storeName: "渋谷店",

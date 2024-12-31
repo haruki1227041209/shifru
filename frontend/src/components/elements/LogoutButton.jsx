@@ -5,7 +5,7 @@ import { useSetAtom } from "jotai";
 import { roleAtom } from "@/atoms/authAtom";
 import { useLogin } from "@/hooks/useLogin";
 import { LogOut } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const LogoutButton = () => {
   const { logout } = useLogin();

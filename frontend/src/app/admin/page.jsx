@@ -1,7 +1,7 @@
 "use client";
 
 import useAuthorization from "@/hooks/useAuthorization";
-import LogoutButton from "@/components/LogoutButton";
+import LogoutButton from "@/components/elements/LogoutButton";
 
 const AdminPage = () => {
   useAuthorization("admin");

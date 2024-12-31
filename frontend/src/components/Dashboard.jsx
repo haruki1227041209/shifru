@@ -16,7 +16,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./elements/LogoutButton";
 
 export default function Dashboard({
   navItems,
@@ -26,7 +26,7 @@ export default function Dashboard({
 }) {
   return (
     <SidebarProvider>
-      <div className="flex h-screen">
+      <div className="flex h-screen w-full">
         <Sidebar className="w-64">
           <SidebarHeader className="p-4">
             <div className="flex items-center space-x-2">
@@ -62,12 +62,12 @@ export default function Dashboard({
           </SidebarContent>
           <LogoutButton />
         </Sidebar>
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 w-full overflow-auto">
           <header className="flex h-16 items-center border-b px-4">
             <SidebarTrigger />
             <h1 className="ml-4 text-lg font-semibold">ダッシュボード</h1>
           </header>
-          <div className="p-4">{children}</div>
+          <div className="p-4 w-full">{children}</div>
         </main>
       </div>
     </SidebarProvider>
