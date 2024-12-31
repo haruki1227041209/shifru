@@ -1,5 +1,7 @@
 import { useState } from "react";
 import CalendarNavigation from "@/components/calendar/CalendarNavigation";
+import WeekdayHeader from "./WeekdayHeader";
+import StaffShiftCell from "./StaffShiftCell";
 
 const StaffShiftCalendar = () => {
   const today = new Date();
@@ -12,14 +14,16 @@ const StaffShiftCalendar = () => {
   const startDay = isFirstHalf ? 1 : 16;
   const endDay = isFirstHalf ? 15 : daysInMonth;
 
-  const dates = Array.from(
-    { length: endDay - startDay + 1 },
-    (_, i) => i + startDay
-  );
+  const dates = Array.from({ length: endDay - startDay + 1 }, (_, i) => {
+    const day = i + startDay;
+    return {
+      year,
+      month: month + 1,
+      day,
+    };
+  });
 
   const firstDayOfWeek = new Date(year, month, startDay).getDay();
-
-  const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
 
   const goToPrevious = () => {
     if (isFirstHalf) {
@@ -41,10 +45,13 @@ const StaffShiftCalendar = () => {
     }
   };
 
-  const isToday = (date) =>
-    date === today.getDate() &&
-    month === today.getMonth() &&
-    year === today.getFullYear();
+  const isToday = (date) => {
+    return (
+      date === today.getDate() &&
+      month === today.getMonth() &&
+      year === today.getFullYear()
+    );
+  };
 
   return (
     <div>
@@ -54,40 +61,20 @@ const StaffShiftCalendar = () => {
         title={`${year}年${month + 1}月 ${isFirstHalf ? "前半" : "後半"}`}
       />
 
-      <div className="grid grid-cols-7 gap-0.5 text-center">
-        {weekdays.map((weekday) => (
-          <div key={weekday} className="text-xs font-bold p-2">
-            {weekday}
-          </div>
-        ))}
-      </div>
+      <WeekdayHeader />
 
-      <div className="grid grid-cols-7 gap-0.5 text-left">
+      <div className="grid grid-cols-7 gap-0.5">
         {/* 空白セルを追加 */}
         {Array.from({ length: firstDayOfWeek }).map((_, index) => (
           <div key={`empty-${index}`} className="p-1 h-24" />
         ))}
 
-        {/* 日付セルを追加 */}
         {dates.map((date) => (
-          <div
-            key={date}
-            className="border p-1 h-24 text-xs cursor-pointer flex flex-col justify-between"
-          >
-            <div
-              className={`${isToday(date) ? "text-blue-600 semi-bold" : ""}`}
-            >
-              {date}
-            </div>
-
-            <div className="text-[9px]">
-              <div>ランチ</div>茅場町
-            </div>
-
-            <div className="text-gray-600">10:00</div>
-
-            <div className="font-medium">23:00</div>
-          </div>
+          <StaffShiftCell
+            key={`${date.year}-${date.month}-${date.day}`}
+            date={date}
+            isToday={isToday(date.day)}
+          />
         ))}
       </div>
     </div>
