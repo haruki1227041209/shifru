@@ -3,27 +3,15 @@ import WeekdayHeader from "./WeekdayHeader";
 import StaffShiftCell from "./StaffShiftCell";
 import { useAtom } from "jotai";
 import { isFirstHalfAtom, monthAtom, yearAtom } from "@/atoms/calendarAtoms";
+import { generateDates, isToday } from "@/utils/calendarUtils";
 
 const StaffShiftCalendar = () => {
   const [year] = useAtom(yearAtom);
   const [month] = useAtom(monthAtom);
   const [isFirstHalf] = useAtom(isFirstHalfAtom);
 
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  const startDay = isFirstHalf ? 1 : 16;
-  const endDay = isFirstHalf ? 15 : daysInMonth;
-
-  const dates = Array.from({ length: endDay - startDay + 1 }, (_, i) => {
-    const day = i + startDay;
-    return {
-      year,
-      month: month + 1,
-      day,
-    };
-  });
-
-  const firstDayOfWeek = new Date(year, month, startDay).getDay();
+  const dates = generateDates(year, month, isFirstHalf);
+  const firstDayOfWeek = new Date(year, month, isFirstHalf ? 1 : 16).getDay();
 
   const goToPrevious = () => {
     if (isFirstHalf) {
@@ -43,14 +31,6 @@ const StaffShiftCalendar = () => {
       setMonth((prev) => (prev === 11 ? 0 : prev + 1));
       if (month === 11) setYear((prev) => prev + 1);
     }
-  };
-
-  const isToday = (date, today = new Date()) => {
-    return (
-      date === today.getDate() &&
-      month === today.getMonth() &&
-      year === today.getFullYear()
-    );
   };
 
   return (
@@ -73,7 +53,7 @@ const StaffShiftCalendar = () => {
           <StaffShiftCell
             key={`${date.year}-${date.month}-${date.day}`}
             date={date}
-            isToday={isToday(date.day)}
+            isToday={isToday(date)}
           />
         ))}
       </div>
