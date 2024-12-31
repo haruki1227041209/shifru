@@ -1,13 +1,13 @@
-import { useState } from "react";
 import CalendarNavigation from "@/components/calendar/CalendarNavigation";
 import WeekdayHeader from "./WeekdayHeader";
 import StaffShiftCell from "./StaffShiftCell";
+import { useAtom } from "jotai";
+import { isFirstHalfAtom, monthAtom, yearAtom } from "@/atoms/calendarAtoms";
 
 const StaffShiftCalendar = () => {
-  const today = new Date();
-  const [year, setYear] = useState(today.getFullYear());
-  const [month, setMonth] = useState(today.getMonth());
-  const [isFirstHalf, setIsFirstHalf] = useState(today.getDate() <= 15);
+  const [year] = useAtom(yearAtom);
+  const [month] = useAtom(monthAtom);
+  const [isFirstHalf] = useAtom(isFirstHalfAtom);
 
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
@@ -45,7 +45,7 @@ const StaffShiftCalendar = () => {
     }
   };
 
-  const isToday = (date) => {
+  const isToday = (date, today = new Date()) => {
     return (
       date === today.getDate() &&
       month === today.getMonth() &&
