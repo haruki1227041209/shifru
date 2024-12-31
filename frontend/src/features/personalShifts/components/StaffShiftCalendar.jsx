@@ -4,6 +4,7 @@ import StaffShiftCell from "./StaffShiftCell";
 import { useAtom } from "jotai";
 import { isFirstHalfAtom, monthAtom, yearAtom } from "@/atoms/calendarAtoms";
 import { generateDates, isToday } from "@/utils/calendarUtils";
+import { useCalendarNavigation } from "@/hooks/useCalendarNavigation";
 
 const StaffShiftCalendar = () => {
   const [year] = useAtom(yearAtom);
@@ -13,31 +14,13 @@ const StaffShiftCalendar = () => {
   const dates = generateDates(year, month, isFirstHalf);
   const firstDayOfWeek = new Date(year, month, isFirstHalf ? 1 : 16).getDay();
 
-  const goToPrevious = () => {
-    if (isFirstHalf) {
-      setIsFirstHalf(false);
-      setMonth((prev) => (prev === 0 ? 11 : prev - 1));
-      if (month === 0) setYear((prev) => prev - 1);
-    } else {
-      setIsFirstHalf(true);
-    }
-  };
-
-  const goToNext = () => {
-    if (isFirstHalf) {
-      setIsFirstHalf(false);
-    } else {
-      setIsFirstHalf(true);
-      setMonth((prev) => (prev === 11 ? 0 : prev + 1));
-      if (month === 11) setYear((prev) => prev + 1);
-    }
-  };
+  const { goToPrevious, goToNext } = useCalendarNavigation();
 
   return (
     <div>
       <CalendarNavigation
-        onPrevious={goToPrevious}
-        onNext={goToNext}
+        onPrevious={() => goToPrevious(year, month, isFirstHalf)} // 無名関数
+        onNext={() => goToNext(year, month, isFirstHalf)}
         title={`${year}年${month + 1}月 ${isFirstHalf ? "前半" : "後半"}`}
       />
 
