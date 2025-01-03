@@ -1,7 +1,7 @@
-const StaffShiftCell = ({ date, isToday, shift }) => {
+const StaffShiftCell = ({ date, isToday, shift, dateKey }) => {
   return (
     <div
-      key={`${date.year}-${date.month}-${date.day}`}
+      key={dateKey}
       className="border p-0.5 h-24 text-xs cursor-pointer flex flex-col justify-between"
     >
       <div
