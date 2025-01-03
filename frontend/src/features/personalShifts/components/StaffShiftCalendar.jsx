@@ -9,6 +9,7 @@ import { useCalendarNavigation } from "@/hooks/useCalendarNavigation";
 import { getStaffShifts } from "@/api/staffShiftService";
 import { useEffect } from "react";
 import { formatDateKey } from "@/utils/dateUtils";
+import CalendarModal from "@/components/calendar/CalendarModal";
 
 const StaffShiftCalendar = () => {
   const [year] = useAtom(yearAtom);
@@ -54,12 +55,14 @@ const StaffShiftCalendar = () => {
           const shift = shiftsByDate[dateKey]; // シフトデータを日付キーで取得
 
           return (
-            <StaffShiftCell
-              key={dateKey}
-              date={date}
-              shift={shift}
-              isToday={isToday(date)}
-            />
+            <CalendarModal key={dateKey} date={date} shift={shift}>
+              <StaffShiftCell
+                key={dateKey}
+                date={date}
+                shift={shift}
+                isToday={isToday(date)}
+              />
+            </CalendarModal>
           );
         })}
       </div>
