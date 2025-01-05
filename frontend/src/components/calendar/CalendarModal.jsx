@@ -6,8 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import TimeRangePicker from "../elements/TimeRangePicker";
 
 const CalendarModal = ({ children, date, shift, dateKey }) => {
   return (
@@ -22,49 +21,7 @@ const CalendarModal = ({ children, date, shift, dateKey }) => {
         ) : (
           <div>なし</div>
         )}
-        <div className="space-y-4">
-          <div>
-            <label
-              htmlFor="startTime"
-              className="block text-sm font-medium text-gray-700"
-            >
-              開始時間
-            </label>
-            <Input
-              type="time"
-              id="startTime"
-              value={shift?.start_time || ""}
-              // onChange={}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="endTime"
-              className="block text-sm font-medium text-gray-700"
-            >
-              終了時間
-            </label>
-            <Input
-              type="time"
-              id="endTime"
-              value={shift?.end_time || ""}
-              // onChange={}
-            />
-          </div>
-          <div className="flex justify-between">
-            <Button
-            // onClick={}
-            >
-              保存
-            </Button>
-            <Button
-              // onClick={}
-              variant="destructive"
-            >
-              削除
-            </Button>
-          </div>
-        </div>
+        <TimeRangePicker />
       </DialogContent>
     </Dialog>
   );
