@@ -55,9 +55,15 @@ const StaffShiftCalendar = () => {
           const shift = shiftsByDate[dateKey]; // シフトデータを日付キーで取得
 
           return (
-            <CalendarModal key={dateKey} date={date} shift={shift}>
+            <CalendarModal
+              key={dateKey}
+              dateKey={dateKey}
+              date={date}
+              shift={shift}
+            >
               <StaffShiftCell
                 key={dateKey}
+                dateKey={dateKey}
                 date={date}
                 shift={shift}
                 isToday={isToday(date)}
