@@ -4,7 +4,7 @@ import CalendarTimePicker from "./CalendarTimePicker";
 import { useAtom } from "jotai";
 import { shiftsByDateAtom } from "@/atoms/shiftsAtom";
 import { DialogClose } from "../ui/dialog";
-import { saveShifts } from "@/api/staffShiftService";
+import { deleteShift, saveShifts } from "@/api/staffShiftService";
 
 const TimeRangePicker = ({ dateKey, shift }) => {
   const [startTime, setStartTime] = useState(shift ? shift.start_time : "");
@@ -69,15 +69,29 @@ const TimeRangePicker = ({ dateKey, shift }) => {
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     setStartTime("");
     setEndTime("");
+    // シフトが存在しない場合は処理を中断
+    if (!(dateKey in shiftsByDate)) {
+      // alert("シフトが存在しません！");
+      return;
+    }
 
-    if (dateKey in shiftsByDate) {
-      const updatedShifts = { ...shiftsByDate };
-      delete updatedShifts[dateKey];
+    try {
+      await deleteShift(dateKey);
 
-      setShiftsByDate(updatedShifts);
+      if (dateKey in shiftsByDate) {
+        const updatedShifts = { ...shiftsByDate };
+        delete updatedShifts[dateKey];
+
+        setShiftsByDate(updatedShifts);
+      }
+
+      alert("シフトが削除されました！");
+    } catch (error) {
+      console.error("シフト削除に失敗しました:", error);
+      alert("シフト削除に失敗しました！");
     }
   };
 
