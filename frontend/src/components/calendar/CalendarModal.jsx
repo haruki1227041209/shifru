@@ -16,12 +16,8 @@ const CalendarModal = ({ children, date, shift, dateKey }) => {
         <DialogHeader>
           <DialogTitle>{`${date.month}/${date.day}`}</DialogTitle>
         </DialogHeader>
-        {shift ? (
-          <div>{`${shift.start_time}から${shift.end_time}`}</div>
-        ) : (
-          <div>なし</div>
-        )}
-        <TimeRangePicker />
+        <DialogDescription></DialogDescription>
+        <TimeRangePicker dateKey={dateKey} shift={shift} />
       </DialogContent>
     </Dialog>
   );

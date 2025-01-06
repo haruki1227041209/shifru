@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "../ui/label";
 
-const CalendarTimePicker = ({ label }) => {
+const CalendarTimePicker = ({ label, value, onChange }) => {
   const generateTimeOptions = () => {
     const times = [];
     let hour = 10;
@@ -34,7 +34,7 @@ const CalendarTimePicker = ({ label }) => {
   return (
     <div>
       <Label className="block text-sm font-medium text-gray-700">{label}</Label>
-      <Select>
+      <Select value={value} onValueChange={onChange}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="時間を選択して下さい" />
         </SelectTrigger>
