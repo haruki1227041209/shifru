@@ -20,3 +20,37 @@ export const isToday = (date, today = new Date()) => {
     date.year === today.getFullYear()
   );
 };
+
+export const isModalAllowed = (date) => {
+  const today = new Date(); // 今日の日付
+  const thisYear = today.getFullYear();
+  const thisMonth = today.getMonth();
+
+  const thisMonth6 = new Date(thisYear, thisMonth, 6); // 当月6日
+  const thisMonth20 = new Date(thisYear, thisMonth, 20); // 当月20日
+  const thisMonth5 = new Date(thisYear, thisMonth, 5); // 当月5日
+  const thisMonth21 = new Date(thisYear, thisMonth, 21); // 当月21日
+
+  const targetDate = new Date(date.year, date.month - 1, date.day); // チェック対象の日付
+
+  // 1. 当月6日〜20日なら来月1日以降が入力可能
+  if (today >= thisMonth6 && today <= thisMonth20) {
+    const nextMonth1 = new Date(thisYear, thisMonth + 1, 1); // 来月1日
+    return targetDate >= nextMonth1; // 来月1日以降ならモーダル表示
+  }
+
+  // 2. 当月5日以前なら当月15日以降が入力可能
+  if (today <= thisMonth5) {
+    const thisMonth15 = new Date(thisYear, thisMonth, 15); // 当月15日
+    return targetDate >= thisMonth15; // 当月15日以降ならモーダル表示
+  }
+
+  // 3. 当月21日以降なら翌月15日以降が入力可能
+  if (today >= thisMonth21) {
+    const nextMonth15 = new Date(thisYear, thisMonth + 1, 15); // 翌月15日
+    return targetDate >= nextMonth15; // 翌月15日以降ならモーダル表示
+  }
+
+  // 条件外はすべてモーダルなし
+  return false;
+};

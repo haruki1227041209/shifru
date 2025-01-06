@@ -4,7 +4,7 @@ import StaffShiftCell from "./StaffShiftCell";
 import { useAtom } from "jotai";
 import { isFirstHalfAtom, monthAtom, yearAtom } from "@/atoms/calendarAtoms";
 import { shiftsByDateAtom } from "@/atoms/shiftsAtom";
-import { generateDates, isToday } from "@/utils/calendarUtils";
+import { generateDates, isModalAllowed, isToday } from "@/utils/calendarUtils";
 import { useCalendarNavigation } from "@/hooks/useCalendarNavigation";
 import { getStaffShifts } from "@/api/staffShiftService";
 import { useEffect } from "react";
@@ -54,7 +54,9 @@ const StaffShiftCalendar = () => {
           const dateKey = formatDateKey(date.year, date.month, date.day);
           const shift = shiftsByDate[dateKey]; // シフトデータを日付キーで取得
 
-          return (
+          const isAllowed = isModalAllowed(date);
+
+          return isAllowed ? (
             <CalendarModal
               key={dateKey}
               dateKey={dateKey}
@@ -62,13 +64,20 @@ const StaffShiftCalendar = () => {
               shift={shift}
             >
               <StaffShiftCell
-                key={dateKey}
                 dateKey={dateKey}
                 date={date}
                 shift={shift}
                 isToday={isToday(date)}
               />
             </CalendarModal>
+          ) : (
+            <StaffShiftCell
+              key={dateKey}
+              dateKey={dateKey}
+              date={date}
+              shift={shift}
+              isToday={isToday(date)}
+            />
           );
         })}
       </div>
