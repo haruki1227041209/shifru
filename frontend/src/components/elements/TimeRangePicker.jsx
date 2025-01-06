@@ -4,6 +4,7 @@ import CalendarTimePicker from "./CalendarTimePicker";
 import { useAtom } from "jotai";
 import { shiftsByDateAtom } from "@/atoms/shiftsAtom";
 import { DialogClose } from "../ui/dialog";
+import { saveShifts } from "@/api/staffShiftService";
 
 const TimeRangePicker = ({ dateKey, shift }) => {
   const [startTime, setStartTime] = useState(shift ? shift.start_time : "");
@@ -40,15 +41,29 @@ const TimeRangePicker = ({ dateKey, shift }) => {
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (startTime && endTime) {
-      setShiftsByDate({
-        ...shiftsByDate,
-        [dateKey]: {
+      try {
+        // バックエンドにシフトデータを送信(編集も可能)
+        await saveShifts({
+          day: dateKey,
           start_time: startTime,
           end_time: endTime,
-        },
-      });
+        });
+        // フロントエンド側の状態を更新
+        setShiftsByDate({
+          ...shiftsByDate,
+          [dateKey]: {
+            start_time: startTime,
+            end_time: endTime,
+          },
+        });
+
+        alert("シフトが保存されました！");
+      } catch (error) {
+        console.error("シフトの保存に失敗しました:", error);
+        alert("シフトの保存に失敗しました！");
+      }
     } else {
       alert("開始時間と終了時間を設定してください！");
     }
