@@ -48,7 +48,7 @@ class Api::V1::StaffShiftsController < ApplicationController
   end
 
   def destroy
-    shift = Shift.find_by(id: params[:id], staff_id: current_staff.id)
+    shift = Shift.find_by(day: params[:id], staff_id: current_staff.id)
     if shift
       shift.destroy
       head :no_content

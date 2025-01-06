@@ -1,7 +1,7 @@
-const StaffShiftCell = ({ date, isToday, shift }) => {
+const StaffShiftCell = ({ date, isToday, shift, dateKey }) => {
   return (
     <div
-      key={`${date.year}-${date.month}-${date.day}`}
+      key={dateKey}
       className="border p-0.5 h-24 text-xs cursor-pointer flex flex-col justify-between"
     >
       <div
@@ -18,7 +18,7 @@ const StaffShiftCell = ({ date, isToday, shift }) => {
             {/* <div>ランチ</div>
             <div>茅場町</div> */}
             <div>{shift.start_time}</div>
-            <div>{shift.end_time === "23:30" ? "last" : shift.end_time}</div>
+            <div>{shift.end_time === "23:45" ? "LAST" : shift.end_time}</div>
           </div>
         ) : (
           <div className="text-xl"> - </div>
