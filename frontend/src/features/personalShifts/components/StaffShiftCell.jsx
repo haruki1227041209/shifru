@@ -18,7 +18,7 @@ const StaffShiftCell = ({ date, isToday, shift, dateKey }) => {
             {/* <div>ランチ</div>
             <div>茅場町</div> */}
             <div>{shift.start_time}</div>
-            <div>{shift.end_time === "23:30" ? "last" : shift.end_time}</div>
+            <div>{shift.end_time === "23:45" ? "LAST" : shift.end_time}</div>
           </div>
         ) : (
           <div className="text-xl"> - </div>
