@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { roleAtom } from "@/atoms/authAtom";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { staffRoleAtom } from "@/atoms/staffAtom";
 
 const useAuthorization = (requiredRole) => {
