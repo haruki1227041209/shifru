@@ -21,9 +21,10 @@ export function LoginForm({ className, ...props }) {
   const router = useRouter();
   const { login } = useLogin();
   // const setRole = useSetAtom(roleAtom);
-  const [role] = useAtom(staffRoleAtom);
+  // const [role] = useAtom(staffRoleAtom);
+  // console.log(role);
 
-  const onSubmit = (e) => handleLogin(e, login, role, router);
+  const onSubmit = (e) => handleLogin(e, login, router);
 
   return (
     <div className={`flex flex-col gap-6 ${className}`} {...props}>

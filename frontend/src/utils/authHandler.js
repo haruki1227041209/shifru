@@ -1,11 +1,12 @@
-export const handleLogin = async (e, login, role, router) => {
+export const handleLogin = async (e, login, router) => {
   e.preventDefault();
 
   const employeeNumber = e.target.employee.value;
   const password = e.target.password.value;
 
   try {
-    await login(employeeNumber, password);
+    const { data } = await login(employeeNumber, password);
+    const role = data.role;
 
     // console.log("ドキュメント:", document.cookie);
 
