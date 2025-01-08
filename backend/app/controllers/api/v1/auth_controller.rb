@@ -14,10 +14,13 @@ class Api::V1::AuthController < ApplicationController
         is_manager: staff.is_manager
       }
 
-      cookies[:jwt] = { value: token, httponly: true, secure: Rails.env.production? }
-      cookies[:role] = { value: role.to_json, path: "/", httponly: false } # roleはクライアントから参照可能
+      cookies[:jwt] = { value: token,
+      httponly: true,
+      secure: Rails.env.production?, # 本番環境ではHTTPSのみ
+      same_site: Rails.env.production? ? :none : :lax # 本番環境はNone, ローカルはLax
+      }
 
-      render json: { staff_name: staff.name }, status: :ok
+      render json: { staff_name: staff.name, role: role }, status: :ok
     else
       render json: { errors: { message: '認証に失敗しました' } }, status: :unauthorized
     end
