@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { roleAtom } from "@/atoms/authAtom";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
+import { staffRoleAtom } from "@/atoms/staffAtom";
 
 const useAuthorization = (requiredRole) => {
   const router = useRouter();
-  const role = useAtomValue(roleAtom);
+  const [role] = useAtom(staffRoleAtom);
 
   useEffect(() => {
     const isAuthorized =

@@ -26,6 +26,7 @@ export const handleLogin = async (e, login, role, router) => {
     // setRole(parsedRole);
 
     // console.log(parsedRole);
+    console.log(role.is_admin);
 
     if (role.is_admin) {
       router.push("/admin");
