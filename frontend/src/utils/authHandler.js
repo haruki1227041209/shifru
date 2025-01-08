@@ -1,35 +1,39 @@
+import { staffRoleAtom } from "@/atoms/staffAtom";
+import { useAtom } from "jotai";
+
 export const handleLogin = async (e, login, setRole, router) => {
   e.preventDefault();
 
   const employeeNumber = e.target.employee.value;
   const password = e.target.password.value;
+  const [role] = useAtom(staffRoleAtom);
 
   try {
     await login(employeeNumber, password);
 
-    console.log("ドキュメント:", document.cookie);
+    // console.log("ドキュメント:", document.cookie);
 
-    const role = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("role="))
-      ?.split("=")[1];
+    // const role = document.cookie
+    //   .split("; ")
+    //   .find((row) => row.startsWith("role="))
+    //   ?.split("=")[1];
 
-    console.log("Encoded Role:", role);
+    // console.log("Encoded Role:", role);
 
-    const decoded = decodeURIComponent(role);
-    console.log("Decoded Role:", decoded);
+    // const decoded = decodeURIComponent(role);
+    // console.log("Decoded Role:", decoded);
 
-    const parsedRole = decoded ? JSON.parse(decoded) : {};
-    console.log("Parsed Role:", parsedRole);
+    // const parsedRole = decoded ? JSON.parse(decoded) : {};
+    // console.log("Parsed Role:", parsedRole);
 
-    // const parsedRole = role ? JSON.parse(decodeURIComponent(role)) : {};
-    setRole(parsedRole);
+    // // const parsedRole = role ? JSON.parse(decodeURIComponent(role)) : {};
+    // setRole(parsedRole);
 
-    console.log(parsedRole);
+    // console.log(parsedRole);
 
-    if (parsedRole.is_admin) {
+    if (role.is_admin) {
       router.push("/admin");
-    } else if (parsedRole.is_manager) {
+    } else if (role.is_manager) {
       router.push("/manager");
     } else {
       router.push("/staff");

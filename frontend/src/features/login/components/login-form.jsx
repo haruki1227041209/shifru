@@ -19,7 +19,7 @@ import { useLogin } from "@/hooks/useLogin";
 export function LoginForm({ className, ...props }) {
   const router = useRouter();
   const { login } = useLogin();
-  const setRole = useSetAtom(roleAtom);
+  // const setRole = useSetAtom(roleAtom);
 
   const onSubmit = (e) => handleLogin(e, login, setRole, router);
 
