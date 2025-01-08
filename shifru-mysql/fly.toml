@@ -1,0 +1,27 @@
+# fly.toml app configuration file generated for shifru-mysql on 2025-01-07T20:02:49+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'shifru-mysql'
+primary_region = 'nrt'
+
+[build]
+  image = 'mysql:8.4'
+
+[[vm]]
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 2048
+
+[processes]
+  app = """--datadir /data/mysql \
+    --mysql-native-password=ON"""
+
+[mounts]
+  source = "mysqldata"
+  destination = "/data"
+
+[env]
+  MYSQL_DATABASE = "my_database"
+  MYSQL_USER = "my_user"

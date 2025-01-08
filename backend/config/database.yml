@@ -2,18 +2,19 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['MYSQL_USER'] %>
-  password: <%= ENV['MYSQL_PASSWORD'] %>
-  host: db
+  username: <%= ENV.fetch('MYSQL_USER', 'root') %>
+  password: <%= ENV.fetch('MYSQL_PASSWORD', 'password') %>
+  host: <%= ENV.fetch("DB_HOST", "db") %> # デフォルト値を設定
 
 development:
   <<: *default
-  database: <%= ENV['MYSQL_DATABASE'] %>
+  database: <%= ENV.fetch('MYSQL_DATABASE', 'development_db') %>
 
 test:
   <<: *default
-  database: <%= ENV['MYSQL_DATABASE'] %>_test
+  database: <%= ENV.fetch('MYSQL_DATABASE', 'test_db') %>
 
 production:
   <<: *default
-  database: <%= ENV['MYSQL_DATABASE'] %>_production
+  database: <%= ENV.fetch('MYSQL_DATABASE', 'production_db') %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %> # デフォルト値を設定

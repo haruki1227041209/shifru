@@ -10,18 +10,24 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { handleLogin } from "@/utils/authHandler";
 import { useRouter } from "next/navigation";
-import { useSetAtom } from "jotai";
-import { roleAtom } from "@/atoms/authAtom";
 import { useLogin } from "@/hooks/useLogin";
 
 export function LoginForm({ className, ...props }) {
-  const router = useRouter();
   const { login } = useLogin();
-  const setRole = useSetAtom(roleAtom);
+  const router = useRouter();
 
-  const onSubmit = (e) => handleLogin(e, login, setRole, router);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const employeeNumber = e.target.employee.value;
+    const password = e.target.password.value;
+
+    try {
+      await login(employeeNumber, password, router);
+    } catch (error) {
+      console.error("ログインエラー:", error);
+    }
+  };
 
   return (
     <div className={`flex flex-col gap-6 ${className}`} {...props}>
@@ -31,7 +37,7 @@ export function LoginForm({ className, ...props }) {
           <CardDescription>アカウントにログインしてください。</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="employee">社員番号</Label>
