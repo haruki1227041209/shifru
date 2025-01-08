@@ -7,6 +7,8 @@ export const handleLogin = async (e, login, setRole, router) => {
   try {
     await login(employeeNumber, password);
 
+    console.log("ドキュメント:", document.cookie);
+
     const role = document.cookie
       .split("; ")
       .find((row) => row.startsWith("role="))
