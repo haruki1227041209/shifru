@@ -12,7 +12,15 @@ export const handleLogin = async (e, login, setRole, router) => {
       .find((row) => row.startsWith("role="))
       ?.split("=")[1];
 
-    const parsedRole = role ? JSON.parse(decodeURIComponent(role)) : {};
+    console.log("Encoded Role:", role);
+
+    const decoded = decodeURIComponent(role);
+    console.log("Decoded Role:", decoded);
+
+    const parsedRole = decoded ? JSON.parse(decoded) : {};
+    console.log("Parsed Role:", parsedRole);
+
+    // const parsedRole = role ? JSON.parse(decodeURIComponent(role)) : {};
     setRole(parsedRole);
 
     console.log(parsedRole);
