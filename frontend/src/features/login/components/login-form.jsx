@@ -12,16 +12,18 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { handleLogin } from "@/utils/authHandler";
 import { useRouter } from "next/navigation";
-import { useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import { roleAtom } from "@/atoms/authAtom";
 import { useLogin } from "@/hooks/useLogin";
+import { staffRoleAtom } from "@/atoms/staffAtom";
 
 export function LoginForm({ className, ...props }) {
   const router = useRouter();
   const { login } = useLogin();
   // const setRole = useSetAtom(roleAtom);
+  const [role] = useAtom(staffRoleAtom);
 
-  const onSubmit = (e) => handleLogin(e, login, setRole, router);
+  const onSubmit = (e) => handleLogin(e, login, role, router);
 
   return (
     <div className={`flex flex-col gap-6 ${className}`} {...props}>

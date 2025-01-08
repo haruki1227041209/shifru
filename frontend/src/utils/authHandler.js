@@ -1,12 +1,8 @@
-import { staffRoleAtom } from "@/atoms/staffAtom";
-import { useAtom } from "jotai";
-
-export const handleLogin = async (e, login, setRole, router) => {
+export const handleLogin = async (e, login, role, router) => {
   e.preventDefault();
 
   const employeeNumber = e.target.employee.value;
   const password = e.target.password.value;
-  const [role] = useAtom(staffRoleAtom);
 
   try {
     await login(employeeNumber, password);
