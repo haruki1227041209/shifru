@@ -6,6 +6,7 @@ export const handleLogin = async (e, login, router) => {
 
   try {
     const { data } = await login(employeeNumber, password);
+    console.log(data);
     const role = data.role;
 
     // console.log("ドキュメント:", document.cookie);

@@ -18,13 +18,25 @@ import { useLogin } from "@/hooks/useLogin";
 import { staffRoleAtom } from "@/atoms/staffAtom";
 
 export function LoginForm({ className, ...props }) {
-  const router = useRouter();
   const { login } = useLogin();
+  const router = useRouter();
   // const setRole = useSetAtom(roleAtom);
   // const [role] = useAtom(staffRoleAtom);
   // console.log(role);
 
-  const onSubmit = (e) => handleLogin(e, login, router);
+  // const onSubmit = (e) => handleLogin(e, login, router);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const employeeNumber = e.target.employee.value;
+    const password = e.target.password.value;
+
+    try {
+      await login(employeeNumber, password, router);
+    } catch (error) {
+      console.error("ログインエラー:", error);
+    }
+  };
 
   return (
     <div className={`flex flex-col gap-6 ${className}`} {...props}>
@@ -34,7 +46,7 @@ export function LoginForm({ className, ...props }) {
           <CardDescription>アカウントにログインしてください。</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="employee">社員番号</Label>
