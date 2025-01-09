@@ -1,16 +1,12 @@
 "use client";
 
+import RegisterStaff from "@/components/register/RegisterStaff";
 import useAuthorization from "@/hooks/useAuthorization";
 
 const AdminRegistManagerPage = () => {
   useAuthorization("admin");
 
-  return (
-    <div>
-      <h1>店長登録ページ</h1>
-      <p>ここは管理者のみがアクセスできます。</p>
-    </div>
-  );
+  return <RegisterStaff title={"店長"} />;
 };
 
 export default AdminRegistManagerPage;
