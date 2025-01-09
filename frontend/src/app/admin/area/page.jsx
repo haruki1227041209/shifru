@@ -1,16 +1,12 @@
 "use client";
 
+import RegisterAreaStore from "@/components/register/RegisterAreaStore";
 import useAuthorization from "@/hooks/useAuthorization";
 
 const AdminAreaPage = () => {
   useAuthorization("admin");
 
-  return (
-    <div>
-      <h1>エリア登録ページ</h1>
-      <p>ここは管理者のみがアクセスできます。</p>
-    </div>
-  );
+  return <RegisterAreaStore title={"エリア"} />;
 };
 
 export default AdminAreaPage;
