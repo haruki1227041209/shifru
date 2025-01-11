@@ -50,12 +50,12 @@ const RegisterStore = ({ title, onSubmit, areas }) => {
           <div className="grid w-full items-center gap-4">
             {title === "店舗" && (
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="framework">エリア選択</Label>
+                <Label htmlFor="area">エリア選択</Label>
                 <Select
                   value={selectedAreaName}
                   onValueChange={(value) => setSelectedAreaName(value)}
                 >
-                  <SelectTrigger id="framework">
+                  <SelectTrigger id="area">
                     <SelectValue placeholder="選択して下さい" />
                   </SelectTrigger>
                   <SelectContent position="popper">
