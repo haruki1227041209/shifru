@@ -1,7 +1,7 @@
 "use client";
 
 import { createArea } from "@/api/areaService";
-import RegisterAreaStore from "@/components/register/RegisterAreaStore";
+import RegisterArea from "@/components/register/RegisterArea";
 import useAuthorization from "@/hooks/useAuthorization";
 
 const AdminAreaPage = () => {
@@ -18,7 +18,7 @@ const AdminAreaPage = () => {
     }
   };
 
-  return <RegisterAreaStore title={"エリア"} onSubmit={handleAreaSubmit} />;
+  return <RegisterArea title={"エリア"} onSubmit={handleAreaSubmit} />;
 };
 
 export default AdminAreaPage;
