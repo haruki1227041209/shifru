@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -57,12 +56,10 @@ const RegisterStaff = ({ title }) => {
               <Label htmlFor="password">パスワード</Label>
               <Input id="password" placeholder="パスワードを入力して下さい" />
             </div>
+            <Button>登録</Button>
           </div>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button>登録</Button>
-      </CardFooter>
     </Card>
   );
 };

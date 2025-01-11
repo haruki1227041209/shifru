@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -47,12 +46,10 @@ const RegisterAreaStore = ({ title }) => {
               <Label htmlFor="name">{title}名</Label>
               <Input id="name" placeholder={`${title}名を入力して下さい`} />
             </div>
+            <Button>登録</Button>
           </div>
         </form>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button>登録</Button>
-      </CardFooter>
     </Card>
   );
 };
