@@ -12,6 +12,7 @@ export default function ManagerLayout({ children }) {
   const dashboardProps = {
     navItems: [
       { title: "シフト管理", icon: Calendar, url: "/manager" },
+      { title: "スタッフ登録", icon: Users, url: "/manager/create-staff" },
       { title: "スタッフ管理", icon: Users, url: "/manager/staff-management" },
       { title: "設定", icon: Settings, url: "/manager/manager-settings" },
     ],
