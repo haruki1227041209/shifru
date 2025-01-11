@@ -6,15 +6,14 @@ import { Calendar, Users, Settings } from "lucide-react";
 import { useAtom } from "jotai";
 import { staffNameAtom } from "@/atoms/staffAtom";
 
-export default function ManagerLayout({ children }) {
+export default function AdminLayout({ children }) {
   const [staffName] = useAtom(staffNameAtom);
 
   const dashboardProps = {
     navItems: [
-      { title: "シフト管理", icon: Calendar, url: "/manager" },
-      { title: "スタッフ登録", icon: Users, url: "/manager/create-staff" },
-      { title: "スタッフ管理", icon: Users, url: "/manager/staff-management" },
-      { title: "設定", icon: Settings, url: "/manager/manager-settings" },
+      { title: "エリア登録", icon: Settings, url: "/admin/area" },
+      { title: "店舗登録", icon: Settings, url: "/admin/store" },
+      { title: "店長登録", icon: Settings, url: "/admin/regist-manager" },
     ],
     staffName: staffName,
     storeName: "渋谷店",

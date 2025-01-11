@@ -6,12 +6,19 @@ import { staffRoleAtom } from "@/atoms/staffAtom";
 const useAuthorization = (requiredRole) => {
   const router = useRouter();
   const [role] = useAtom(staffRoleAtom);
+  console.log(role.is_admin);
 
   useEffect(() => {
+    if (role.is_admin === undefined) {
+      console.log("初回レンダリングなのでスキップ");
+      return;
+    }
     const isAuthorized =
       (requiredRole === "admin" && role.is_admin) ||
       (requiredRole === "manager" && role.is_manager) ||
       (requiredRole === "staff" && !role.is_admin && !role.is_manager);
+
+    console.log(role.is_admin);
 
     if (!isAuthorized) {
       router.push("/login");
