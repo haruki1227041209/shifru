@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,8 +15,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 
-const RegisterAreaStore = ({ title }) => {
+const RegisterAreaStore = ({ title, onSubmit }) => {
+  const [areaName, setAreaName] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    onSubmit({ name: areaName });
+    setAreaName("");
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -26,7 +34,7 @@ const RegisterAreaStore = ({ title }) => {
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="grid w-full items-center gap-4">
             {title === "店舗" && (
               <div className="flex flex-col space-y-1.5">
@@ -44,7 +52,13 @@ const RegisterAreaStore = ({ title }) => {
             )}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">{title}名</Label>
-              <Input id="name" placeholder={`${title}名を入力して下さい`} />
+              <Input
+                id="name"
+                placeholder={`${title}名を入力して下さい`}
+                value={areaName}
+                onChange={(e) => setAreaName(e.target.value)}
+                required
+              />
             </div>
             <Button>登録</Button>
           </div>
