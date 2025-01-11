@@ -28,21 +28,21 @@ const RegisterAreaStore = ({ title }) => {
       </CardHeader>
       <CardContent>
         <form>
-          {title === "店舗" && (
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="framework">エリア選択</Label>
-              <Select>
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="選択して下さい" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="next">茅場町八丁堀</SelectItem>
-                  <SelectItem value="sveltekit">どこか</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          )}
           <div className="grid w-full items-center gap-4">
+            {title === "店舗" && (
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="framework">エリア選択</Label>
+                <Select>
+                  <SelectTrigger id="framework">
+                    <SelectValue placeholder="選択して下さい" />
+                  </SelectTrigger>
+                  <SelectContent position="popper">
+                    <SelectItem value="next">茅場町八丁堀</SelectItem>
+                    <SelectItem value="sveltekit">どこか</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">{title}名</Label>
               <Input id="name" placeholder={`${title}名を入力して下さい`} />
