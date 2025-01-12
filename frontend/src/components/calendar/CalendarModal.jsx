@@ -7,6 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import TimeRangePicker from "../elements/TimeRangePicker";
+import CurrentShift from "../elements/CurrentShift";
 
 const CalendarModal = ({ children, date, shift, dateKey }) => {
   return (
@@ -16,7 +17,7 @@ const CalendarModal = ({ children, date, shift, dateKey }) => {
         <DialogHeader>
           <DialogTitle>{`${date.month}/${date.day}`}</DialogTitle>
         </DialogHeader>
-        <DialogDescription></DialogDescription>
+        <CurrentShift />
         <TimeRangePicker dateKey={dateKey} shift={shift} />
       </DialogContent>
     </Dialog>
