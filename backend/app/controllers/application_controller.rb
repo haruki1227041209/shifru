@@ -12,8 +12,8 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_staff
-    token = cookies[:jwt]
-    return render json: { error: "Not Authorized" }, status: :unauthorized unless token
+    header = request.headers['Authorization']
+    token = header.split.last if header
 
     begin
       decoded = JWT.decode(token, SECRET_KEY)[0]

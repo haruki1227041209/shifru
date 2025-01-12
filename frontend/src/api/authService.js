@@ -7,6 +7,8 @@ export const loginRequest = async (employeeNumber, password) => {
       password,
     },
   });
+  const token = response.data.token;
+  localStorage.setItem("access_token", token);
   return response.data;
 };
 
