@@ -1,6 +1,6 @@
 import { useSetAtom } from "jotai";
 import { staffNameAtom, staffRoleAtom } from "@/atoms/staffAtom";
-import { loginRequest, logoutRequest } from "@/api/authService";
+import { loginRequest } from "@/api/authService";
 
 export const useLogin = () => {
   const setStaffName = useSetAtom(staffNameAtom);
@@ -30,11 +30,5 @@ export const useLogin = () => {
     }
   };
 
-  const logout = async () => {
-    await logoutRequest();
-    setStaffName("");
-    setStaffRole("");
-  };
-
-  return { login, logout };
+  return { login };
 };
