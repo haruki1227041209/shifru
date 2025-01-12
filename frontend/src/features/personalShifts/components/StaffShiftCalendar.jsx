@@ -6,8 +6,8 @@ import { isFirstHalfAtom, monthAtom, yearAtom } from "@/atoms/calendarAtoms";
 import { shiftsByDateAtom } from "@/atoms/shiftsAtom";
 import { generateDates, isModalAllowed, isToday } from "@/utils/calendarUtils";
 import { useCalendarNavigation } from "@/hooks/useCalendarNavigation";
-import { getStaffShifts } from "@/api/staffShiftService";
-import { useEffect } from "react";
+import { getStaffAllShifts, getStaffShifts } from "@/api/staffShiftService";
+import { useEffect, useState } from "react";
 import { formatDateKey } from "@/utils/dateUtils";
 import CalendarModal from "@/components/calendar/CalendarModal";
 
@@ -16,6 +16,7 @@ const StaffShiftCalendar = () => {
   const [month] = useAtom(monthAtom);
   const [isFirstHalf] = useAtom(isFirstHalfAtom);
   const [shiftsByDate, setShiftsByDate] = useAtom(shiftsByDateAtom);
+  const [allShiftsByDate, setAllShiftsByDate] = useState("");
 
   const calendarDates = generateDates(year, month, isFirstHalf);
   const firstDayOfWeek = new Date(year, month, isFirstHalf ? 1 : 16).getDay();
@@ -32,6 +33,19 @@ const StaffShiftCalendar = () => {
       }
     };
     fetchShifts();
+  }, []);
+
+  useEffect(() => {
+    const fetchAllShifts = async () => {
+      try {
+        const data = await getStaffAllShifts();
+        setAllShiftsByDate(data);
+      } catch (error) {
+        console.error("他スタッフのシフトデータの取得失敗:", error);
+      }
+    };
+
+    fetchAllShifts();
   }, []);
 
   return (
@@ -53,6 +67,7 @@ const StaffShiftCalendar = () => {
         {calendarDates.map((date) => {
           const dateKey = formatDateKey(date.year, date.month, date.day);
           const shift = shiftsByDate[dateKey]; // シフトデータを日付キーで取得
+          const allShifts = allShiftsByDate[dateKey];
 
           const isAllowed = isModalAllowed(date);
 
@@ -62,6 +77,7 @@ const StaffShiftCalendar = () => {
               dateKey={dateKey}
               date={date}
               shift={shift}
+              allShifts={allShifts}
             >
               <StaffShiftCell
                 dateKey={dateKey}
