@@ -71,6 +71,10 @@ const StaffShiftCalendar = () => {
 
           const isAllowed = isModalAllowed(date);
 
+          const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+          const weekday =
+            weekdays[new Date(date.year, date.month - 1, date.day).getDay()];
+
           return isAllowed ? (
             <CalendarModal
               key={dateKey}
@@ -78,6 +82,7 @@ const StaffShiftCalendar = () => {
               date={date}
               shift={shift}
               allShifts={allShifts}
+              weekday={weekday}
             >
               <StaffShiftCell
                 dateKey={dateKey}
