@@ -12,7 +12,6 @@ export const useLogin = () => {
 
       setStaffName(data.staff_name);
       setStaffRole(data.role);
-      console.log(data);
 
       if (data.role.is_admin) {
         router.push("/admin");
