@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
       resources :staff_shifts, only: [:index, :destroy] do
         collection do
+          get :all_shifts
           post :bulk_upsert
         end
       end
