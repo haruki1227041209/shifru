@@ -25,3 +25,4 @@ primary_region = 'nrt'
 [env]
   MYSQL_DATABASE = "my_database"
   MYSQL_USER = "my_user"
+  TZ = "Asia/Tokyo"
