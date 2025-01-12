@@ -14,21 +14,19 @@ class Api::V1::AuthController < ApplicationController
         is_manager: staff.is_manager
       }
 
-      cookies[:jwt] = { value: token,
-      httponly: true,
-      secure: Rails.env.production?, # 本番環境ではHTTPSのみ
-      same_site: Rails.env.production? ? :none : :lax # 本番環境はNone, ローカルはLax
-      }
-
-      render json: { staff_name: staff.name, role: role }, status: :ok
+      render json: { staff_name: staff.name, role: role, token: token }, status: :ok
     else
       render json: { errors: { message: '認証に失敗しました' } }, status: :unauthorized
     end
   end
 
   def logout
-    cookies.delete(:jwt)
-    cookies.delete(:role)
+    cookies.delete(
+      :jwt,
+      httponly: true,
+      secure: Rails.env.production?,
+      same_site: Rails.env.production? ? :none : :lax
+    )
     render json: { message: "Logged out successfully" }, status: :ok
   end
 
