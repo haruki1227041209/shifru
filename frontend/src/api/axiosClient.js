@@ -2,8 +2,21 @@ import axios from "axios";
 
 const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1",
-  withCredentials: true,
 });
+
+axiosClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("access_token"); // ログイン後に保存したJWTを取り出す
+    if (token) {
+      // "Authorization: Bearer <token>" ヘッダを付与
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 axiosClient.interceptors.response.use(
   (response) => {
