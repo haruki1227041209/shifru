@@ -9,20 +9,13 @@ import {
 import TimeRangePicker from "../elements/TimeRangePicker";
 import CurrentShift from "../elements/CurrentShift";
 
-const CalendarModal = ({
-  children,
-  date,
-  shift,
-  dateKey,
-  allShifts,
-  weekday,
-}) => {
+const CalendarModal = ({ children, date, shift, dateKey, allShifts }) => {
   return (
     <Dialog key={dateKey}>
       <DialogTrigger>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{`${date.month}/${date.day} (${weekday})`}</DialogTitle>
+          <DialogTitle>{`${date.month}/${date.day} (${date.weekday})`}</DialogTitle>
         </DialogHeader>
         <CurrentShift allShifts={allShifts} />
         <TimeRangePicker dateKey={dateKey} shift={shift} />
