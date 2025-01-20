@@ -3,12 +3,16 @@ export const generateDates = (year, month, isFirstHalf) => {
   const startDay = isFirstHalf ? 1 : 16;
   const endDay = isFirstHalf ? 15 : daysInMonth;
 
+  const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+
   return Array.from({ length: endDay - startDay + 1 }, (_, i) => {
     const day = i + startDay;
+    const weekday = weekdays[new Date(year, month, day).getDay()];
     return {
       year,
       month: month + 1,
       day,
+      weekday,
     };
   });
 };
