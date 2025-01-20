@@ -23,6 +23,7 @@ export const isToday = (date, today = new Date()) => {
 
 export const isModalAllowed = (date) => {
   const today = new Date(); // 今日の日付
+  today.setHours(0, 0, 0, 0); // 今日の日付を 00:00:00 にリセットしないと締切日でモーダルが表示されない
   const thisYear = today.getFullYear();
   const thisMonth = today.getMonth();
 
