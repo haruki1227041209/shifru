@@ -27,33 +27,39 @@ const ShiftTable = ({}) => {
     };
   });
   return (
-    <div className="overflow-x-auto">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>スタッフ名</TableHead>
-            {dates.map((date, index) => (
-              <TableHead key={index} className="text-center">
-                {date.day} ({date.weekday})
-              </TableHead>
+    <Table className="table-auto border border-collapse border-gray-300">
+      <TableHeader>
+        <TableRow className="bg-gray-100">
+          <TableHead className="border border-gray-300">スタッフ名</TableHead>
+          {dates.map((date, index) => (
+            <TableHead
+              key={index}
+              className="border border-gray-300 text-center"
+            >
+              {date.day}({date.weekday})
+            </TableHead>
+          ))}
+        </TableRow>
+      </TableHeader>
+
+      <TableBody>
+        {staff.map((person, rowIndex) => (
+          <TableRow key={rowIndex} className="hover:bg-gray-300">
+            <TableCell className="border border-gray-300">
+              {person.name}
+            </TableCell>
+            {dates.map((date, colIndex) => (
+              <TableCell
+                key={colIndex}
+                className="border border-gray-300 text-center hover:bg-gray-400"
+              >
+                {shifts[person.id]?.[date.day] || "-"}
+              </TableCell>
             ))}
           </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {staff.map((person, rowIndex) => (
-            <TableRow key={rowIndex}>
-              <TableCell>{person.name}</TableCell>
-              {dates.map((date, colIndex) => (
-                <TableCell key={colIndex} className="text-center">
-                  {shifts[person.id]?.[date.day] || "-"}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 
