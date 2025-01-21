@@ -10,8 +10,9 @@ import { formatDateKey } from "@/utils/dateUtils";
 import CalendarModal from "@/components/calendar/CalendarModal";
 import AllShiftsCell from "./AllShiftsCell";
 import WeekdayHeader from "@/features/personalShifts/components/WeekdayHeader";
+import ShiftTable from "./ShiftTable";
 
-const AllShiftsCalendar = () => {
+const AllShiftsCalendar = ({ allShifts }) => {
   const [year] = useAtom(yearAtom);
   const [month] = useAtom(monthAtom);
   const [isFirstHalf] = useAtom(isFirstHalfAtom);
@@ -22,18 +23,6 @@ const AllShiftsCalendar = () => {
 
   const { goToPrevious, goToNext } = useCalendarNavigation();
 
-  useEffect(() => {
-    const fetchShifts = async () => {
-      try {
-        const map = await getStaffShifts();
-        setShiftsByDate(map);
-      } catch (error) {
-        console.error("シフトデータの取得失敗:", error);
-      }
-    };
-    fetchShifts();
-  }, []);
-
   return (
     <div>
       <CalendarNavigation
@@ -42,40 +31,7 @@ const AllShiftsCalendar = () => {
         title={`${year}年${month + 1}月 ${isFirstHalf ? "前半" : "後半"}`}
       />
 
-      <WeekdayHeader />
-
-      <div className="grid grid-cols-[200px_minmax(900px,_1fr)_100px] gap-0.5">
-        {calendarDates.map((date) => {
-          const dateKey = formatDateKey(date.year, date.month, date.day);
-          const shift = shiftsByDate[dateKey]; // シフトデータを日付キーで取得
-
-          const isAllowed = isModalAllowed(date);
-
-          return isAllowed ? (
-            <CalendarModal
-              key={dateKey}
-              dateKey={dateKey}
-              date={date}
-              shift={shift}
-            >
-              <AllShiftsCell
-                dateKey={dateKey}
-                date={date}
-                shift={shift}
-                isToday={isToday(date)}
-              />
-            </CalendarModal>
-          ) : (
-            <AllShiftsCell
-              key={dateKey}
-              dateKey={dateKey}
-              date={date}
-              shift={shift}
-              isToday={isToday(date)}
-            />
-          );
-        })}
-      </div>
+      <ShiftTable calendarDates={calendarDates} allShifts={allShifts} />
     </div>
   );
 };
