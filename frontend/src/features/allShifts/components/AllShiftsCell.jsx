@@ -16,7 +16,7 @@ const AllShiftsCell = ({ calendarDates, allShifts, type }) => {
           </TableHead>
           {calendarDates.map((date, index) => (
             <TableHead
-              key={index}
+              key={`header-${index}-${type}`}
               className="border border-gray-300 text-center"
             >
               {date.day}({date.weekday})
@@ -35,58 +35,60 @@ const AllShiftsCell = ({ calendarDates, allShifts, type }) => {
             );
           })
           .map(([staffName, staffShifts], rowIndex) => (
-            <>
-              <TableRow key={rowIndex} className="hover:bg-gray-300">
-                <TableCell className="border border-gray-300 whitespace-nowrap sticky left-0 bg-white z-10">
-                  {staffName}
-                </TableCell>
-                {calendarDates.map((date, colIndex) => {
-                  const shiftsType = staffShifts[type];
+            <TableRow
+              key={`row-${rowIndex}-${type}`}
+              className="hover:bg-gray-300"
+            >
+              <TableCell className="border border-gray-300 whitespace-nowrap sticky left-0 bg-white z-10">
+                {staffName}
+              </TableCell>
+              {calendarDates.map((date, colIndex) => {
+                const shiftsType = staffShifts[type];
 
-                  const shift = shiftsType.find(
-                    (shift) => shift.day === date.key
-                  );
+                const shift = shiftsType.find(
+                  (shift) => shift.day === date.key
+                );
 
-                  return (
-                    <TableCell
-                      key={colIndex}
-                      className="border border-gray-300 text-center hover:bg-gray-400"
-                    >
-                      {
-                        shift ? (
-                          type === "lunch" ? (
-                            // ランチの場合の表示条件
-                            shift.end_time < "16:00" ? (
-                              <>
-                                {shift.start_time}
-                                <br />
-                                {shift.end_time}
-                              </>
-                            ) : (
-                              `${shift.start_time}`
-                            )
-                          ) : // ディナーの場合の表示条件
-                          shift.end_time < "23:45" ? (
-                            <>
-                              {shift.start_time}
-                              <br />
-                              {shift.end_time}
-                            </>
-                          ) : (
-                            `${shift.start_time}`
-                          )
+                return (
+                  <TableCell
+                    key={`cell-${rowIndex}-${colIndex}-${type}`}
+                    className="border border-gray-300 text-center hover:bg-gray-400"
+                  >
+                    {shift ? (
+                      type === "lunch" ? (
+                        // ランチの場合の表示条件
+                        shift.end_time < "16:00" ? (
+                          <>
+                            {shift.start_time}
+                            <br />
+                            {shift.end_time}
+                          </>
                         ) : (
-                          "-"
-                        ) // シフトがない場合
-                      }
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            </>
+                          `${shift.start_time}`
+                        )
+                      ) : shift.end_time < "23:45" ? (
+                        // ディナーの場合の表示条件
+                        <>
+                          {shift.start_time}
+                          <br />
+                          {shift.end_time}
+                        </>
+                      ) : (
+                        `${shift.start_time}`
+                      )
+                    ) : (
+                      "-"
+                    )}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
           ))}
         {[...Array(3)].map((_, rowIndex) => (
-          <TableRow key={rowIndex + 100} className="hover:bg-gray-300">
+          <TableRow
+            key={`help-row-${rowIndex}-${type}`}
+            className="hover:bg-gray-300"
+          >
             <TableCell className="border border-gray-300 whitespace-nowrap sticky left-0 bg-white z-10">
               {rowIndex === 0 ? (
                 "ヘルプ"
@@ -96,7 +98,7 @@ const AllShiftsCell = ({ calendarDates, allShifts, type }) => {
             </TableCell>
             {calendarDates.map((date, colIndex) => (
               <TableCell
-                key={colIndex}
+                key={`help-cell-${rowIndex}-${colIndex}-${type}`}
                 className="border border-gray-300 text-center hover:bg-gray-400"
               ></TableCell>
             ))}
