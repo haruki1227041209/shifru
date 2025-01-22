@@ -6,7 +6,10 @@ import { isFirstHalfAtom, monthAtom, yearAtom } from "@/atoms/calendarAtoms";
 import { shiftsByDateAtom } from "@/atoms/shiftsAtom";
 import { generateDates, isModalAllowed, isToday } from "@/utils/calendarUtils";
 import { useCalendarNavigation } from "@/hooks/useCalendarNavigation";
-import { getStaffAllShifts, getStaffShifts } from "@/api/staffShiftService";
+import {
+  getStaffAllShiftsByDate,
+  getStaffShifts,
+} from "@/api/staffShiftService";
 import { useEffect, useState } from "react";
 import { formatDateKey } from "@/utils/dateUtils";
 import CalendarModal from "@/components/calendar/CalendarModal";
@@ -38,7 +41,7 @@ const StaffShiftCalendar = () => {
   useEffect(() => {
     const fetchAllShifts = async () => {
       try {
-        const data = await getStaffAllShifts();
+        const data = await getStaffAllShiftsByDate();
         setAllShiftsByDate(data);
       } catch (error) {
         console.error("他スタッフのシフトデータの取得失敗:", error);
