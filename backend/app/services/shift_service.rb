@@ -3,7 +3,7 @@ class ShiftService
   LUNCH_START = Time.parse("10:00").change(year: 2000, month: 1, day: 1)
   LUNCH_END = Time.parse("16:00").change(year: 2000, month: 1, day: 1)
   DINNER_START = Time.parse("17:00").change(year: 2000, month: 1, day: 1)
-  DINNER_END = Time.parse("23:30").change(year: 2000, month: 1, day: 1)
+  DINNER_END = Time.parse("23:45").change(year: 2000, month: 1, day: 1)
 
   def self.fetch_all_shifts(current_staff)
     shifts = Shift.where(is_confirm: true, is_edit: false, store_id: current_staff.store_id).includes(:staff).map do |shift|
