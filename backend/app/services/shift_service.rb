@@ -5,8 +5,8 @@ class ShiftService
   DINNER_START = Time.parse("17:00").change(year: 2000, month: 1, day: 1)
   DINNER_END = Time.parse("23:30").change(year: 2000, month: 1, day: 1)
 
-  def self.fetch_all_shifts
-    shifts = Shift.where(is_confirm: true, is_edit: false).includes(:staff).map do |shift|
+  def self.fetch_all_shifts(current_staff)
+    shifts = Shift.where(is_confirm: true, is_edit: false, store_id: current_staff.store_id).includes(:staff).map do |shift|
       separate_shift(shift, shift.start_time, shift.end_time)
     end
 
