@@ -8,11 +8,14 @@ export const generateDates = (year, month, isFirstHalf) => {
   return Array.from({ length: endDay - startDay + 1 }, (_, i) => {
     const day = i + startDay;
     const weekday = weekdays[new Date(year, month, day).getDay()];
+    const paddedMonth = (month + 1).toString().padStart(2, "0");
+    const paddedDay = day.toString().padStart(2, "0");
     return {
       year,
       month: month + 1,
       day,
       weekday,
+      key: `${year}-${paddedMonth}-${paddedDay}`,
     };
   });
 };

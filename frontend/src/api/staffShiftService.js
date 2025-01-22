@@ -12,7 +12,17 @@ export const getStaffShifts = async () => {
   return shiftMap;
 };
 
-export const getStaffAllShifts = async () => {
+export const getStoreShifts = async () => {
+  try {
+    const response = await axiosClient.get("/manager_shifts");
+    return response.data;
+  } catch (error) {
+    console.error("全体のシフトの取得に失敗しました", error);
+    throw error;
+  }
+};
+
+export const getStaffAllShiftsByDate = async () => {
   try {
     const response = await axiosClient.get("/staff_shifts/all_shifts");
     return response.data;

@@ -1,38 +1,219 @@
 import CalendarNavigation from "@/components/calendar/CalendarNavigation";
 import { useAtom } from "jotai";
 import { isFirstHalfAtom, monthAtom, yearAtom } from "@/atoms/calendarAtoms";
-import { shiftsByDateAtom } from "@/atoms/shiftsAtom";
+import { allShiftsAtom, shiftsByDateAtom } from "@/atoms/shiftsAtom";
 import { generateDates, isModalAllowed, isToday } from "@/utils/calendarUtils";
 import { useCalendarNavigation } from "@/hooks/useCalendarNavigation";
-import { getStaffShifts } from "@/api/staffShiftService";
+import ShiftTable from "./ShiftTable";
+import { getStoreShifts } from "@/api/staffShiftService";
 import { useEffect } from "react";
-import { formatDateKey } from "@/utils/dateUtils";
-import CalendarModal from "@/components/calendar/CalendarModal";
-import AllShiftsCell from "./AllShiftsCell";
-import WeekdayHeader from "@/features/personalShifts/components/WeekdayHeader";
 
-const AllShiftsCalendar = () => {
+const AllShiftsCalendar = ({}) => {
   const [year] = useAtom(yearAtom);
   const [month] = useAtom(monthAtom);
   const [isFirstHalf] = useAtom(isFirstHalfAtom);
-  const [shiftsByDate, setShiftsByDate] = useAtom(shiftsByDateAtom);
+  const [allShifts, setAllShifts] = useAtom(allShiftsAtom);
 
   const calendarDates = generateDates(year, month, isFirstHalf);
-  const firstDayOfWeek = new Date(year, month, isFirstHalf ? 1 : 16).getDay();
 
   const { goToPrevious, goToNext } = useCalendarNavigation();
 
   useEffect(() => {
-    const fetchShifts = async () => {
+    const fetchStoreShifts = async () => {
       try {
-        const map = await getStaffShifts();
-        setShiftsByDate(map);
+        const data = await getStoreShifts();
+        setAllShifts(data);
       } catch (error) {
-        console.error("シフトデータの取得失敗:", error);
+        console.error("全体のシフトデータの取得失敗:", error);
       }
     };
-    fetchShifts();
+
+    fetchStoreShifts();
   }, []);
+
+  // setAllShifts({
+  //   "大塚 春希": {
+  //     lunch: [
+  //       {
+  //         shift_id: 50,
+  //         staff_id: 5,
+  //         day: "2024-11-01",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 51,
+  //         staff_id: 5,
+  //         day: "2024-11-07",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 52,
+  //         staff_id: 5,
+  //         day: "2024-11-14",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 53,
+  //         staff_id: 5,
+  //         day: "2024-11-15",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 54,
+  //         staff_id: 5,
+  //         day: "2024-11-21",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 55,
+  //         staff_id: 5,
+  //         day: "2024-11-22",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 56,
+  //         staff_id: 5,
+  //         day: "2024-11-28",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 57,
+  //         staff_id: 5,
+  //         day: "2024-11-29",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 172,
+  //         staff_id: 5,
+  //         day: "2024-11-05",
+  //         start_time: "10:30",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 178,
+  //         staff_id: 5,
+  //         day: "2025-02-01",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 179,
+  //         staff_id: 5,
+  //         day: "2025-02-02",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 180,
+  //         staff_id: 5,
+  //         day: "2025-02-03",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //       {
+  //         shift_id: 181,
+  //         staff_id: 5,
+  //         day: "2025-02-06",
+  //         start_time: "10:00",
+  //         end_time: "16:00",
+  //       },
+  //     ],
+  //     dinner: [
+  //       {
+  //         shift_id: 50,
+  //         staff_id: 5,
+  //         day: "2024-11-01",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 51,
+  //         staff_id: 5,
+  //         day: "2024-11-07",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 52,
+  //         staff_id: 5,
+  //         day: "2024-11-14",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 53,
+  //         staff_id: 5,
+  //         day: "2024-11-15",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 54,
+  //         staff_id: 5,
+  //         day: "2024-11-21",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 55,
+  //         staff_id: 5,
+  //         day: "2024-11-22",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 56,
+  //         staff_id: 5,
+  //         day: "2024-11-28",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 57,
+  //         staff_id: 5,
+  //         day: "2024-11-29",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 178,
+  //         staff_id: 5,
+  //         day: "2025-02-01",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 179,
+  //         staff_id: 5,
+  //         day: "2025-02-02",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 180,
+  //         staff_id: 5,
+  //         day: "2025-02-03",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //       {
+  //         shift_id: 181,
+  //         staff_id: 5,
+  //         day: "2025-02-06",
+  //         start_time: "17:00",
+  //         end_time: "23:30",
+  //       },
+  //     ],
+  //   },
+  // });
 
   return (
     <div>
@@ -42,40 +223,7 @@ const AllShiftsCalendar = () => {
         title={`${year}年${month + 1}月 ${isFirstHalf ? "前半" : "後半"}`}
       />
 
-      <WeekdayHeader />
-
-      <div className="grid grid-cols-[200px_minmax(900px,_1fr)_100px] gap-0.5">
-        {calendarDates.map((date) => {
-          const dateKey = formatDateKey(date.year, date.month, date.day);
-          const shift = shiftsByDate[dateKey]; // シフトデータを日付キーで取得
-
-          const isAllowed = isModalAllowed(date);
-
-          return isAllowed ? (
-            <CalendarModal
-              key={dateKey}
-              dateKey={dateKey}
-              date={date}
-              shift={shift}
-            >
-              <AllShiftsCell
-                dateKey={dateKey}
-                date={date}
-                shift={shift}
-                isToday={isToday(date)}
-              />
-            </CalendarModal>
-          ) : (
-            <AllShiftsCell
-              key={dateKey}
-              dateKey={dateKey}
-              date={date}
-              shift={shift}
-              isToday={isToday(date)}
-            />
-          );
-        })}
-      </div>
+      <ShiftTable calendarDates={calendarDates} allShifts={allShifts} />
     </div>
   );
 };

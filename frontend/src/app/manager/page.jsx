@@ -1,14 +1,14 @@
 "use client";
 
+import AllShiftsCalendar from "@/features/allShifts/components/AllShiftsCalendar";
 import useAuthorization from "@/hooks/useAuthorization";
-import ShiftSchedule from "@/components/ShiftSchedule/ShiftSchedule";
 
 const ManagerPage = () => {
   useAuthorization("manager");
 
   return (
     <div>
-      <ShiftSchedule />
+      <AllShiftsCalendar />
     </div>
   );
 };

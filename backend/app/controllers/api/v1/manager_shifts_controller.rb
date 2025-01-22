@@ -1,10 +1,10 @@
 class Api::V1::ManagerShiftsController < ApplicationController
   before_action :authenticate_staff
-  before_action :authorize_admin_or_manager
+  before_action :authorize_admin_or_manager, except: [:index]
   before_action :set_shift, only: [:update_time]
 
   def index
-    all_shifts = ShiftService.fetch_all_shifts
+    all_shifts = ShiftService.fetch_all_shifts(current_staff)
     formatted_shifts = ShiftSerializer.serialize(all_shifts)
     render json: formatted_shifts, status: :ok
   end
