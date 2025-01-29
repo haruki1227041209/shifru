@@ -1,15 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  staff: one
-  shift: one
-  shift_date: 2024-10-29
-  start_time: 2024-10-29 03:53:01
-  end_time: 2024-10-29 03:53:01
+# one:
+#   staff: one
+#   shift: one
+#   shift_date: 2024-10-29
+#   start_time: 2024-10-29 03:53:01
+#   end_time: 2024-10-29 03:53:01
 
-two:
-  staff: two
-  shift: two
-  shift_date: 2024-10-29
-  start_time: 2024-10-29 03:53:01
-  end_time: 2024-10-29 03:53:01
+# two:
+#   staff: two
+#   shift: two
+#   shift_date: 2024-10-29
+#   start_time: 2024-10-29 03:53:01
+#   end_time: 2024-10-29 03:53:01
