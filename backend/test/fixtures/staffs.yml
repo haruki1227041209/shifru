@@ -1,13 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  employee_number: MyString
-  password_digest: MyString
+admin_user:
+  id: 1
+  name: "管理者ユーザー"
+  employee_number: "999999"
+  password_digest: <%= BCrypt::Password.create('admin_password') %>
   is_manager: false
-
-two:
-  name: MyString
-  employee_number: MyString
-  password_digest: MyString
-  is_manager: false
+  is_admin: true
+# two:
+#   name: MyString
+#   employee_number: MyString
+#   password_digest: MyString
+#   is_manager: false
