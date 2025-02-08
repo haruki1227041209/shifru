@@ -182,7 +182,7 @@ Shifruでは、利用者の役割に応じて3種類の権限が設定されて�
 - **スタッフ登録**：従業員の登録
   - _新しくアルバイトを雇用した際に登録_
 - **シフト閲覧**：店舗スタッフのシフトを確認
-  - _例：全体のシフトを確認し、穴がある日程を把握_
+  - _例：全体のシフトを確認し、不足がある日程を把握_
 
 <div align="center">
 
@@ -256,15 +256,15 @@ Shifruでは、利用者の役割に応じて3種類の権限が設定されて�
 
 #### **1. 管理者**
 
-<img src="https://github.com/user-attachments/assets/9fda512e-148f-4cec-833d-92401f253bfa" alt="管理者画面遷移図" title="管理者画面遷移図">
+<img src="document/shifru_pictures/管理者画面遷移図.png" alt="管理者画面遷移図" title="管理者画面遷移図">
 
 #### **2. 店長**
 
-<img src="https://github.com/user-attachments/assets/8eb1a893-e546-48c7-8265-9dfbad1e314a" alt="店長画面遷移図" title="店長画面遷移図">
+<img src="document/shifru_pictures/店長画面遷移図.png" alt="店長画面遷移図" title="店長画面遷移図">
 
 #### **3. スタッフ**
 
-<img src="https://github.com/user-attachments/assets/60f69005-7161-4ef7-ad66-1287101712d5" alt="スタッフ画面遷移図" title="スタッフ画面遷移図">
+<img src="document/shifru_pictures/スタッフ画面遷移図.png" alt="スタッフ画面遷移図" title="スタッフ画面遷移図">
 
 ## **使用技術**
 
