@@ -341,7 +341,7 @@ Shifruでは、利用者の役割に応じて3種類の権限が設定されて�
 
 ## **インフラ構成図**
 
-<img src="document/shifru_pictures/shifru.drawio.png" alt="Shifruインフラ構成図" title="Shifruインフラ構成図">
+<img src="document/shifru_pictures/インフラ構成図.drawio.png" alt="Shifruインフラ構成図" title="Shifruインフラ構成図">
 
 ## **ER図**
 
