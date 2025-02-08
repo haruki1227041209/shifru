@@ -265,17 +265,17 @@ Shifruでは、利用者の役割に応じて3種類の権限が設定されて�
 
 </div>
 
-### **画面遷移図**
+## **画面遷移図**
 
-#### **1. 管理者**
+### **1. 管理者**
 
 <img src="document/shifru_pictures/管理者画面遷移図.png" alt="管理者画面遷移図" title="管理者画面遷移図">
 
-#### **2. 店長**
+### **2. 店長**
 
 <img src="document/shifru_pictures/店長画面遷移図.png" alt="店長画面遷移図" title="店長画面遷移図">
 
-#### **3. スタッフ**
+### **3. スタッフ**
 
 <img src="document/shifru_pictures/スタッフ画面遷移図.png" alt="スタッフ画面遷移図" title="スタッフ画面遷移図">
 
@@ -339,12 +339,9 @@ Shifruでは、利用者の役割に応じて3種類の権限が設定されて�
     - **本番用**: `Dockerfile`
 - **リポジトリ管理**: GitHub
 
----
+## **インフラ構成図**
 
-[インフラ構成図のイメージをここに追加]  
-Shifruのインフラは、フロントエンド（Next.js）を**Vercel**、バックエンド（Rails API）を**Fly.io**でホスティングし、データベースは**MySQL 8.4**を使用しています。  
-Dockerを活用し、開発環境と本番環境を統一する設計になっています。
-要確認!!!
+<img src="document/shifru_pictures/shifru.drawio.png" alt="Shifruインフラ構成図" title="Shifruインフラ構成図">
 
 ## **ER図**
 
