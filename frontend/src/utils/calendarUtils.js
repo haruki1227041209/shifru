@@ -34,12 +34,18 @@ export const isModalAllowed = (date) => {
   const thisYear = today.getFullYear();
   const thisMonth = today.getMonth();
 
+  const thisMonth10 = new Date(thisYear, thisMonth, 10); // 当月10日 特例！！！
   const thisMonth6 = new Date(thisYear, thisMonth, 6); // 当月6日
   const thisMonth20 = new Date(thisYear, thisMonth, 20); // 当月20日
   const thisMonth5 = new Date(thisYear, thisMonth, 5); // 当月5日
   const thisMonth21 = new Date(thisYear, thisMonth, 21); // 当月21日
 
   const targetDate = new Date(date.year, date.month - 1, date.day); // チェック対象の日付
+
+  // 🟢 【特例】今だけ当月10日までは常にモーダル表示
+  if (today <= thisMonth10) {
+    return true;
+  }
 
   // 1. 当月6日〜20日なら来月1日以降が入力可能
   if (today >= thisMonth6 && today <= thisMonth20) {
